@@ -104,3 +104,6 @@ A number of interesting yet relatable insights were found:
 - those that traveled with a company i.e. family or friend had a higher chance of survival than those who traveled by themselves, although ones with less able dependents suffered to a visible degree
 
 - it appears that most men were helping women, children and elderly and other less able passengers to board off the ship and in turn minimized their own chances of survival, leading to 81% male casualties
+
+
+Please go through the [Code](https://saptarshidatta.in/2020/08/01/Titanic-Data-EDA.html) associated with this post. It's self-expalnatory along with this literature.
