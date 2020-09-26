@@ -13,8 +13,9 @@
 <h1 id="data-dictionary">Data Dictionary:</h1>
 <p><img src="/_posts/data%20dictionary.JPG" alt="" /></p>
 
-<p>Assumptions:
-The following has been assumed with respect to some of the variables and further has been used to derive some additional variables for better analysis.</p>
+<h1 id="assumptions">Assumptions:</h1>
+
+<p>The following has been assumed with respect to some of the variables and further has been used to derive some additional variables for better analysis.</p>
 
 <p>pclass: This variable is a proxy for socio-economic status (SES)</p>
 
@@ -27,5 +28,41 @@ The following has been assumed with respect to some of the variables and further
   </li>
   <li>
     <p>3rd = Lower</p>
+  </li>
+</ul>
+
+<p>age: This variable provides information about the age of the passenger</p>
+
+<ul>
+  <li>
+    <p>Age is fractional if less than 1.</p>
+  </li>
+  <li>
+    <p>If the age is estimated, is it in the form of xx.5</p>
+  </li>
+</ul>
+
+<p>sibsp: The variable defines family relations in this way…</p>
+
+<ul>
+  <li>
+    <p>Sibling = brother, sister, stepbrother, stepsister</p>
+  </li>
+  <li>
+    <p>Spouse = husband, wife (mistresses and fiances have been ignored)</p>
+  </li>
+</ul>
+
+<p>parch: This variable defines family relations in this way…</p>
+
+<ul>
+  <li>
+    <p>Parent = mother, father</p>
+  </li>
+  <li>
+    <p>Child = daughter, son, stepdaughter, stepson</p>
+  </li>
+  <li>
+    <p>Some children traveled only with a nanny, therefore parch=0 for them.</p>
   </li>
 </ul>
