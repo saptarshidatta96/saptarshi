@@ -70,3 +70,37 @@ The following Feature Engineering tasks were done.
 - Determined the fare_range from the fare variable.
 
 - Filled the rows of Cabin Variable with 'Not in a Cabin" which were earlier empty. Else we would have to remove this variable as only 23% of the passengers had a cabin.
+
+# Missing Value Treatment
+
+- The missing value in the Age variable has been imputed with mean age.
+
+# Summary
+ 
+Let's start with the summary of ideas that will be presented in the notebook:
+
+The data set from data quality point of view has some missing data, but they do not impact the analysis that much as we will feature engineer these variables and also derive some other variables from these variables that will result in much clear analysis. Although there is a discrepancy between the number of tickets and passengers(it looks like a single ticket was shared among multiple passengers) and the sum of the records (training plus test datasets). There has also been no information regarding the crew members with their details, so nothing is known about them, but the goal of the analysis is to predict which passengers survived.
+
+A number of interesting yet relatable insights were found:
+
+- more men passengers died than female passengers
+
+- most adult men between the ages 18 and 65 did not survive (even though we have a percentage of data where the age is not known and we used missing value imputation.)
+
+- first class passengers were given or automatically got priority over the other classes
+
+- Fare is a misleading feature and cannot be easily correlated to survival, as it is linked to few other features like Passenger class, Cabin and Ticket
+
+- Passenger class, Cabin, Ticket and Fare together give a better picture of survival
+
+- we know a number of passengers across all three passenger classes have overpaid for their tickets and we can easily point them. Maybe they bought tickets to board the ship in the black-market.
+
+- a strange fact that ones who boarded from Southampton took the most of the death toll
+
+- we found passengers passengers who have traveled with a ticket priced £0.00 across all three classes
+
+- to sum it up,first class female passengers stood a better chance of surviving
+
+- those that traveled with a company i.e. family or friend had a higher chance of survival than those who traveled by themselves, although ones with less able dependents suffered to a visible degree
+
+- it appears that most men were helping women, children and elderly and other less able passengers to board off the ship and in turn minimized their own chances of survival, leading to 81% male casualties
