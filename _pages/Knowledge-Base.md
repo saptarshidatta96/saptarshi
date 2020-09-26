@@ -1,3 +1,8 @@
+---
+layout: page
+title: Knowledge Base
+permalink: /kb/
+---
 # Classical Machine Learning
 
 Machine learning (ML) is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. It is the science of getting computers to act without being explicitly programmed.
