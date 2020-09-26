@@ -16,10 +16,7 @@ While there was some element of luck involved in surviving, it seems some groups
 In this challenge, we ask you to build a predictive model that answers the question: “what sorts of people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic class, etc).
 
 # Data Dictionary:
-| Variable     |  Definition     | Key     |
-| :------------- | :----------: | -----------: |
-| Survival | Survival   | 0 : No, 1 = yes|
-| pclass   | Ticket Class | 1st, 2nd, 3rd |
+![]({{site.baseurl}}/images/data%20dictionary.JPG)
 
 
 # Assumptions:
