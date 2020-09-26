@@ -16,7 +16,8 @@ In this challenge, we ask you to build a predictive model that answers the quest
 # Data Dictionary:
 ![]({{site.baseurl}}/_posts/data%20dictionary.JPG)
 
-Assumptions:
+# Assumptions:
+
 The following has been assumed with respect to some of the variables and further has been used to derive some additional variables for better analysis.
 
 pclass: This variable is a proxy for socio-economic status (SES)
@@ -26,3 +27,23 @@ pclass: This variable is a proxy for socio-economic status (SES)
 - 2nd = Middle
 
 - 3rd = Lower
+
+age: This variable provides information about the age of the passenger
+
+- Age is fractional if less than 1.
+
+- If the age is estimated, is it in the form of xx.5
+
+sibsp: The variable defines family relations in this way...
+
+- Sibling = brother, sister, stepbrother, stepsister
+
+- Spouse = husband, wife (mistresses and fiances have been ignored)
+
+parch: This variable defines family relations in this way...
+
+- Parent = mother, father
+
+- Child = daughter, son, stepdaughter, stepson
+
+- Some children traveled only with a nanny, therefore parch=0 for them.
