@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Digit Recognizer with CNN | Saptarshi Datta</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Digit Recognizer with CNN" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="MNIST (“Modified National Institute of Standards and Technology”) is the de-facto “hello world” data set of computer vision. Since its release in 1999, this classic data set of handwritten images has served as the basis for bench marking classification algorithms. As new machine learning techniques emerge, MNIST remains a reliable resource for researchers and learners alike. In this competition, your goal is to correctly identify digits from a data set of tens of thousands of handwritten images. We’ve curated a set of tutorial-style kernels which cover everything from regression to neural networks. We encourage you to experiment with different algorithms to learn first-hand what works well and how techniques compare. This Notebook contains three main parts: -The data preparation -The CNN modeling and evaluation -The results prediction and analysis Data Preparation The Google Drive is mounted on the Google Colab Notebook. The train &amp; test data is then loaded using the well known pandas read_csv(). The train set 42000 rows and 785 columns( including labels) and the test set has 28000 rows and 784 columns. As known, the test set is not supposed to have the labels. After importing the data sets, the label column from the train set is saved as another data frame, where as it is dropped from the original train set. This is merely done due to input requirements of the fit() function which takes the data &amp; the labels separately during the model training phase. Distribution of Training data among Classes The training data seems to be distributed equally among the classes ranging from 0 - 9. Checking for Null Data We checked for null data, but did not find any. No further actions taken in this regard. Normalization We perform a gray scale normalization to reduce the effect of illumination’s differences. Moreover the CNN converge faster when pixel values ranges in [0, 1] rather than on [0, 255]. Reshape Train and test images has been stock into pandas dataframe as 1D vectors of 784 values. We reshape all data to (28x28x1) 3D matrices. Keras(with TensorFlow back end) requires an extra dimension in the end which correspond to channels. MNIST images are gray scaled so it use only one channel. Had it been colored or RGB images containing 3 channels each corresponding to Red, Green &amp; Blue, we would have reshaped 784 vectors to (28x28x3) 3D matrices. Label Encoding Labels are 10 digits numbers from 0 to 9. We need to encode these labels to one hot vectors. Splitting the Train Set Next we split the train set into train and test in the ratio of 9:1. This 10% set will act as the validation set, to prevent our model from over fitting on the train set. CNN Modelling &amp; Evaluation The first is the convolution (Conv2D) layer. It is like a set of learnable filters. We chose to set 64 filters for the two firsts Conv2D layers and 64 filters for the lat one. Each filter transforms a part of the image as defined by the kernel size(3x3) using the kernel filter. The kernel filter matrix is applied on the whole image. Filters are used to transform the image. The CNN can isolate features that are useful everywhere from these transformed images (feature maps). The second important layer in CNN is the pooling (MaxPool2D) layer. This layer simply acts as a down sampling filter. It looks at the 2 neighboring pixels and picks the maximal value. These are used to reduce computational cost, and to some extent also reduces over fitting. We chose the pooling size as (2x2). Combining convolution and pooling layers, CNN are able to combine local features and learn more global features of the image. Dropout is a regularization method, where a proportion of nodes in the layer are randomly ignored (setting their weights to zero) for each training sample. This drops randomly a proportion of the network and forces the network to learn features in a distributed way. This technique also improves generalization and reduces the over fitting. ‘relu’ is the rectified linear activation function Mathematically it can be defined as f(x) = max(0,x). The activation function is used to add non linearity to the network. The Flatten layer is use to convert the final feature maps into a one single 1D vector. This flattening step is needed so that you can make use of fully connected layers after some convolution/maxpool layers. It combines all the found local features of the previous convolution layers. In the end, two fully-connected (Dense) layers are used which are just artificial an neural networks (ANN). In the last dense layer, ‘softmax’ activation is used which is used to output distribution of probability of each class. Here is the Sequential model created: model= tf.keras.models.Sequential( [tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;, input_shape = (28,28,1)), tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;), tf.keras.layers.MaxPooling2D(2, 2), tf.keras.layers.Dropout(.25), tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;), tf.keras.layers.MaxPooling2D(2,2), tf.keras.layers.Flatten(), tf.keras.layers.Dense(128, activation=&#39;relu&#39;), tf.keras.layers.Dense(10, activation=&#39;softmax&#39;)] ) Loss Function &amp; Optimizer We choose the loss function as ‘categorical cross entropy’ as the number of categorical classifications is more than 2. The loss function is the error rate between the observed labels and the predicted ones. We used the Adam Optimizer for this particular problem. Model Summary model.summary() Model: &quot;sequential&quot; _________________________________________________________________ Layer (type) Output Shape Param # ================================================================= conv2d (Conv2D) (None, 26, 26, 64) 640 _________________________________________________________________ conv2d_1 (Conv2D) (None, 24, 24, 64) 36928 _________________________________________________________________ max_pooling2d (MaxPooling2D) (None, 12, 12, 64) 0 _________________________________________________________________ dropout (Dropout) (None, 12, 12, 64) 0 _________________________________________________________________ conv2d_2 (Conv2D) (None, 10, 10, 64) 36928 _________________________________________________________________ max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64) 0 _________________________________________________________________ flatten (Flatten) (None, 1600) 0 _________________________________________________________________ dense (Dense) (None, 128) 204928 _________________________________________________________________ dense_1 (Dense) (None, 10) 1290 ================================================================= Total params: 280,714 Trainable params: 280,714 Non-trainable params: 0 _________________________________________________________________ Train the model The fit function is responsible for training the model. It takes as input the train data as x and the labels as y. In addition to this, we use a validation set as discussed earlier. In addition to this choose batch size as 100, epochs = 24 and verbose = 2. We trained the model using the GPU available on Google Colab. model.fit(X_train, Y_train,validation_data=(X_test, Y_test), batch_size=100, epochs=24, verbose=2) Result Prediction &amp; Analysis After training the model, at the 24th epoch, the training accuracy is 99.8% and the validation accuracy is 98.9%. This shows that our model did not over fit much. Accuracy can be further improved if Data Augmentation is performed. Confusion Matrix We plot the confusion matrix and found out some errors made during classification task performed on the validation set. It seems that our CNN has some little troubles with the 4 digits, hey are mis-classified as 9. Sometime it is very difficult to catch the difference between 4 and 9 when curves are smooth. def plot_confusion_matrix(cm, classes, normalize=False, title=&#39;Confusion matrix&#39;, cmap=plt.cm.Blues): &quot;&quot;&quot; This function prints and plots the confusion matrix. Normalization can be applied by setting `normalize=True`. &quot;&quot;&quot; plt.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap) plt.title(title) plt.colorbar() tick_marks = np.arange(len(classes)) plt.xticks(tick_marks, classes, rotation=45) plt.yticks(tick_marks, classes) if normalize: cm = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis] thresh = cm.max() / 2. for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])): plt.text(j, i, cm[i, j], horizontalalignment=&quot;center&quot;, color=&quot;white&quot; if cm[i, j] &gt; thresh else &quot;black&quot;) plt.tight_layout() plt.ylabel(&#39;True label&#39;) plt.xlabel(&#39;Predicted label&#39;) # Predict the values from the validation dataset Y_pred = model.predict(X_test) # Convert predictions classes to one hot vectors Y_pred_classes = np.argmax(Y_pred,axis = 1) # Convert validation observations to one hot vectors Y_true = np.argmax(Y_test,axis = 1) # compute the confusion matrix confusion_mtx = confusion_matrix(Y_true, Y_pred_classes) # plot the confusion matrix plot_confusion_matrix(confusion_mtx, classes = range(10)) Please access the GitHub Repository to view the code. It’s self Explanatory along with the description given here. © 2020 Saptarshi Datta. All Rights Reserved." />
+<meta property="og:description" content="MNIST (“Modified National Institute of Standards and Technology”) is the de-facto “hello world” data set of computer vision. Since its release in 1999, this classic data set of handwritten images has served as the basis for bench marking classification algorithms. As new machine learning techniques emerge, MNIST remains a reliable resource for researchers and learners alike. In this competition, your goal is to correctly identify digits from a data set of tens of thousands of handwritten images. We’ve curated a set of tutorial-style kernels which cover everything from regression to neural networks. We encourage you to experiment with different algorithms to learn first-hand what works well and how techniques compare. This Notebook contains three main parts: -The data preparation -The CNN modeling and evaluation -The results prediction and analysis Data Preparation The Google Drive is mounted on the Google Colab Notebook. The train &amp; test data is then loaded using the well known pandas read_csv(). The train set 42000 rows and 785 columns( including labels) and the test set has 28000 rows and 784 columns. As known, the test set is not supposed to have the labels. After importing the data sets, the label column from the train set is saved as another data frame, where as it is dropped from the original train set. This is merely done due to input requirements of the fit() function which takes the data &amp; the labels separately during the model training phase. Distribution of Training data among Classes The training data seems to be distributed equally among the classes ranging from 0 - 9. Checking for Null Data We checked for null data, but did not find any. No further actions taken in this regard. Normalization We perform a gray scale normalization to reduce the effect of illumination’s differences. Moreover the CNN converge faster when pixel values ranges in [0, 1] rather than on [0, 255]. Reshape Train and test images has been stock into pandas dataframe as 1D vectors of 784 values. We reshape all data to (28x28x1) 3D matrices. Keras(with TensorFlow back end) requires an extra dimension in the end which correspond to channels. MNIST images are gray scaled so it use only one channel. Had it been colored or RGB images containing 3 channels each corresponding to Red, Green &amp; Blue, we would have reshaped 784 vectors to (28x28x3) 3D matrices. Label Encoding Labels are 10 digits numbers from 0 to 9. We need to encode these labels to one hot vectors. Splitting the Train Set Next we split the train set into train and test in the ratio of 9:1. This 10% set will act as the validation set, to prevent our model from over fitting on the train set. CNN Modelling &amp; Evaluation The first is the convolution (Conv2D) layer. It is like a set of learnable filters. We chose to set 64 filters for the two firsts Conv2D layers and 64 filters for the lat one. Each filter transforms a part of the image as defined by the kernel size(3x3) using the kernel filter. The kernel filter matrix is applied on the whole image. Filters are used to transform the image. The CNN can isolate features that are useful everywhere from these transformed images (feature maps). The second important layer in CNN is the pooling (MaxPool2D) layer. This layer simply acts as a down sampling filter. It looks at the 2 neighboring pixels and picks the maximal value. These are used to reduce computational cost, and to some extent also reduces over fitting. We chose the pooling size as (2x2). Combining convolution and pooling layers, CNN are able to combine local features and learn more global features of the image. Dropout is a regularization method, where a proportion of nodes in the layer are randomly ignored (setting their weights to zero) for each training sample. This drops randomly a proportion of the network and forces the network to learn features in a distributed way. This technique also improves generalization and reduces the over fitting. ‘relu’ is the rectified linear activation function Mathematically it can be defined as f(x) = max(0,x). The activation function is used to add non linearity to the network. The Flatten layer is use to convert the final feature maps into a one single 1D vector. This flattening step is needed so that you can make use of fully connected layers after some convolution/maxpool layers. It combines all the found local features of the previous convolution layers. In the end, two fully-connected (Dense) layers are used which are just artificial an neural networks (ANN). In the last dense layer, ‘softmax’ activation is used which is used to output distribution of probability of each class. Here is the Sequential model created: model= tf.keras.models.Sequential( [tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;, input_shape = (28,28,1)), tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;), tf.keras.layers.MaxPooling2D(2, 2), tf.keras.layers.Dropout(.25), tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;), tf.keras.layers.MaxPooling2D(2,2), tf.keras.layers.Flatten(), tf.keras.layers.Dense(128, activation=&#39;relu&#39;), tf.keras.layers.Dense(10, activation=&#39;softmax&#39;)] ) Loss Function &amp; Optimizer We choose the loss function as ‘categorical cross entropy’ as the number of categorical classifications is more than 2. The loss function is the error rate between the observed labels and the predicted ones. We used the Adam Optimizer for this particular problem. Model Summary model.summary() Model: &quot;sequential&quot; _________________________________________________________________ Layer (type) Output Shape Param # ================================================================= conv2d (Conv2D) (None, 26, 26, 64) 640 _________________________________________________________________ conv2d_1 (Conv2D) (None, 24, 24, 64) 36928 _________________________________________________________________ max_pooling2d (MaxPooling2D) (None, 12, 12, 64) 0 _________________________________________________________________ dropout (Dropout) (None, 12, 12, 64) 0 _________________________________________________________________ conv2d_2 (Conv2D) (None, 10, 10, 64) 36928 _________________________________________________________________ max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64) 0 _________________________________________________________________ flatten (Flatten) (None, 1600) 0 _________________________________________________________________ dense (Dense) (None, 128) 204928 _________________________________________________________________ dense_1 (Dense) (None, 10) 1290 ================================================================= Total params: 280,714 Trainable params: 280,714 Non-trainable params: 0 _________________________________________________________________ Train the model The fit function is responsible for training the model. It takes as input the train data as x and the labels as y. In addition to this, we use a validation set as discussed earlier. In addition to this choose batch size as 100, epochs = 24 and verbose = 2. We trained the model using the GPU available on Google Colab. model.fit(X_train, Y_train,validation_data=(X_test, Y_test), batch_size=100, epochs=24, verbose=2) Result Prediction &amp; Analysis After training the model, at the 24th epoch, the training accuracy is 99.8% and the validation accuracy is 98.9%. This shows that our model did not over fit much. Accuracy can be further improved if Data Augmentation is performed. Confusion Matrix We plot the confusion matrix and found out some errors made during classification task performed on the validation set. It seems that our CNN has some little troubles with the 4 digits, hey are mis-classified as 9. Sometime it is very difficult to catch the difference between 4 and 9 when curves are smooth. def plot_confusion_matrix(cm, classes, normalize=False, title=&#39;Confusion matrix&#39;, cmap=plt.cm.Blues): &quot;&quot;&quot; This function prints and plots the confusion matrix. Normalization can be applied by setting `normalize=True`. &quot;&quot;&quot; plt.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap) plt.title(title) plt.colorbar() tick_marks = np.arange(len(classes)) plt.xticks(tick_marks, classes, rotation=45) plt.yticks(tick_marks, classes) if normalize: cm = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis] thresh = cm.max() / 2. for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])): plt.text(j, i, cm[i, j], horizontalalignment=&quot;center&quot;, color=&quot;white&quot; if cm[i, j] &gt; thresh else &quot;black&quot;) plt.tight_layout() plt.ylabel(&#39;True label&#39;) plt.xlabel(&#39;Predicted label&#39;) # Predict the values from the validation dataset Y_pred = model.predict(X_test) # Convert predictions classes to one hot vectors Y_pred_classes = np.argmax(Y_pred,axis = 1) # Convert validation observations to one hot vectors Y_true = np.argmax(Y_test,axis = 1) # compute the confusion matrix confusion_mtx = confusion_matrix(Y_true, Y_pred_classes) # plot the confusion matrix plot_confusion_matrix(confusion_mtx, classes = range(10)) Please access the GitHub Repository to view the code. It’s self Explanatory along with the description given here. © 2020 Saptarshi Datta. All Rights Reserved." />
+<link rel="canonical" href="https://saptarshidatta.in/2020/08/31/Digit-Recognizer-CNN.html" />
+<meta property="og:url" content="https://saptarshidatta.in/2020/08/31/Digit-Recognizer-CNN.html" />
+<meta property="og:site_name" content="Saptarshi Datta" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-31T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://saptarshidatta.in/2020/08/31/Digit-Recognizer-CNN.html","@type":"BlogPosting","headline":"Digit Recognizer with CNN","dateModified":"2020-08-31T00:00:00-05:00","datePublished":"2020-08-31T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saptarshidatta.in/2020/08/31/Digit-Recognizer-CNN.html"},"description":"MNIST (“Modified National Institute of Standards and Technology”) is the de-facto “hello world” data set of computer vision. Since its release in 1999, this classic data set of handwritten images has served as the basis for bench marking classification algorithms. As new machine learning techniques emerge, MNIST remains a reliable resource for researchers and learners alike. In this competition, your goal is to correctly identify digits from a data set of tens of thousands of handwritten images. We’ve curated a set of tutorial-style kernels which cover everything from regression to neural networks. We encourage you to experiment with different algorithms to learn first-hand what works well and how techniques compare. This Notebook contains three main parts: -The data preparation -The CNN modeling and evaluation -The results prediction and analysis Data Preparation The Google Drive is mounted on the Google Colab Notebook. The train &amp; test data is then loaded using the well known pandas read_csv(). The train set 42000 rows and 785 columns( including labels) and the test set has 28000 rows and 784 columns. As known, the test set is not supposed to have the labels. After importing the data sets, the label column from the train set is saved as another data frame, where as it is dropped from the original train set. This is merely done due to input requirements of the fit() function which takes the data &amp; the labels separately during the model training phase. Distribution of Training data among Classes The training data seems to be distributed equally among the classes ranging from 0 - 9. Checking for Null Data We checked for null data, but did not find any. No further actions taken in this regard. Normalization We perform a gray scale normalization to reduce the effect of illumination’s differences. Moreover the CNN converge faster when pixel values ranges in [0, 1] rather than on [0, 255]. Reshape Train and test images has been stock into pandas dataframe as 1D vectors of 784 values. We reshape all data to (28x28x1) 3D matrices. Keras(with TensorFlow back end) requires an extra dimension in the end which correspond to channels. MNIST images are gray scaled so it use only one channel. Had it been colored or RGB images containing 3 channels each corresponding to Red, Green &amp; Blue, we would have reshaped 784 vectors to (28x28x3) 3D matrices. Label Encoding Labels are 10 digits numbers from 0 to 9. We need to encode these labels to one hot vectors. Splitting the Train Set Next we split the train set into train and test in the ratio of 9:1. This 10% set will act as the validation set, to prevent our model from over fitting on the train set. CNN Modelling &amp; Evaluation The first is the convolution (Conv2D) layer. It is like a set of learnable filters. We chose to set 64 filters for the two firsts Conv2D layers and 64 filters for the lat one. Each filter transforms a part of the image as defined by the kernel size(3x3) using the kernel filter. The kernel filter matrix is applied on the whole image. Filters are used to transform the image. The CNN can isolate features that are useful everywhere from these transformed images (feature maps). The second important layer in CNN is the pooling (MaxPool2D) layer. This layer simply acts as a down sampling filter. It looks at the 2 neighboring pixels and picks the maximal value. These are used to reduce computational cost, and to some extent also reduces over fitting. We chose the pooling size as (2x2). Combining convolution and pooling layers, CNN are able to combine local features and learn more global features of the image. Dropout is a regularization method, where a proportion of nodes in the layer are randomly ignored (setting their weights to zero) for each training sample. This drops randomly a proportion of the network and forces the network to learn features in a distributed way. This technique also improves generalization and reduces the over fitting. ‘relu’ is the rectified linear activation function Mathematically it can be defined as f(x) = max(0,x). The activation function is used to add non linearity to the network. The Flatten layer is use to convert the final feature maps into a one single 1D vector. This flattening step is needed so that you can make use of fully connected layers after some convolution/maxpool layers. It combines all the found local features of the previous convolution layers. In the end, two fully-connected (Dense) layers are used which are just artificial an neural networks (ANN). In the last dense layer, ‘softmax’ activation is used which is used to output distribution of probability of each class. Here is the Sequential model created: model= tf.keras.models.Sequential( [tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;, input_shape = (28,28,1)), tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;), tf.keras.layers.MaxPooling2D(2, 2), tf.keras.layers.Dropout(.25), tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = &#39;relu&#39;), tf.keras.layers.MaxPooling2D(2,2), tf.keras.layers.Flatten(), tf.keras.layers.Dense(128, activation=&#39;relu&#39;), tf.keras.layers.Dense(10, activation=&#39;softmax&#39;)] ) Loss Function &amp; Optimizer We choose the loss function as ‘categorical cross entropy’ as the number of categorical classifications is more than 2. The loss function is the error rate between the observed labels and the predicted ones. We used the Adam Optimizer for this particular problem. Model Summary model.summary() Model: &quot;sequential&quot; _________________________________________________________________ Layer (type) Output Shape Param # ================================================================= conv2d (Conv2D) (None, 26, 26, 64) 640 _________________________________________________________________ conv2d_1 (Conv2D) (None, 24, 24, 64) 36928 _________________________________________________________________ max_pooling2d (MaxPooling2D) (None, 12, 12, 64) 0 _________________________________________________________________ dropout (Dropout) (None, 12, 12, 64) 0 _________________________________________________________________ conv2d_2 (Conv2D) (None, 10, 10, 64) 36928 _________________________________________________________________ max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64) 0 _________________________________________________________________ flatten (Flatten) (None, 1600) 0 _________________________________________________________________ dense (Dense) (None, 128) 204928 _________________________________________________________________ dense_1 (Dense) (None, 10) 1290 ================================================================= Total params: 280,714 Trainable params: 280,714 Non-trainable params: 0 _________________________________________________________________ Train the model The fit function is responsible for training the model. It takes as input the train data as x and the labels as y. In addition to this, we use a validation set as discussed earlier. In addition to this choose batch size as 100, epochs = 24 and verbose = 2. We trained the model using the GPU available on Google Colab. model.fit(X_train, Y_train,validation_data=(X_test, Y_test), batch_size=100, epochs=24, verbose=2) Result Prediction &amp; Analysis After training the model, at the 24th epoch, the training accuracy is 99.8% and the validation accuracy is 98.9%. This shows that our model did not over fit much. Accuracy can be further improved if Data Augmentation is performed. Confusion Matrix We plot the confusion matrix and found out some errors made during classification task performed on the validation set. It seems that our CNN has some little troubles with the 4 digits, hey are mis-classified as 9. Sometime it is very difficult to catch the difference between 4 and 9 when curves are smooth. def plot_confusion_matrix(cm, classes, normalize=False, title=&#39;Confusion matrix&#39;, cmap=plt.cm.Blues): &quot;&quot;&quot; This function prints and plots the confusion matrix. Normalization can be applied by setting `normalize=True`. &quot;&quot;&quot; plt.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap) plt.title(title) plt.colorbar() tick_marks = np.arange(len(classes)) plt.xticks(tick_marks, classes, rotation=45) plt.yticks(tick_marks, classes) if normalize: cm = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis] thresh = cm.max() / 2. for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])): plt.text(j, i, cm[i, j], horizontalalignment=&quot;center&quot;, color=&quot;white&quot; if cm[i, j] &gt; thresh else &quot;black&quot;) plt.tight_layout() plt.ylabel(&#39;True label&#39;) plt.xlabel(&#39;Predicted label&#39;) # Predict the values from the validation dataset Y_pred = model.predict(X_test) # Convert predictions classes to one hot vectors Y_pred_classes = np.argmax(Y_pred,axis = 1) # Convert validation observations to one hot vectors Y_true = np.argmax(Y_test,axis = 1) # compute the confusion matrix confusion_mtx = confusion_matrix(Y_true, Y_pred_classes) # plot the confusion matrix plot_confusion_matrix(confusion_mtx, classes = range(10)) Please access the GitHub Repository to view the code. It’s self Explanatory along with the description given here. © 2020 Saptarshi Datta. All Rights Reserved.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saptarshidatta.in/feed.xml" title="Saptarshi Datta" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Saptarshi Datta</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Digit Recognizer with CNN</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-31T00:00:00-05:00" itemprop="datePublished">
+        Aug 31, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>MNIST (“Modified National Institute of Standards and Technology”) is the de-facto “hello world” data set of computer vision. Since its release in 1999, this classic data set of handwritten images has served as the basis for bench marking classification algorithms. As new machine learning techniques emerge, MNIST remains a reliable resource for researchers and learners alike.</p>
+
+<p>In this competition, your goal is to correctly identify digits from a data set of tens of thousands of handwritten images. We’ve curated a set of tutorial-style kernels which cover everything from regression to neural networks. We encourage you to experiment with different algorithms to learn first-hand what works well and how techniques compare.</p>
+
+<p>This Notebook contains three main parts:</p>
+
+<p>-The data preparation</p>
+
+<p>-The CNN modeling and evaluation</p>
+
+<p>-The results prediction and analysis</p>
+
+<h3 id="data-preparation">Data Preparation</h3>
+
+<p>The Google Drive is mounted on the Google Colab Notebook. The train &amp; test data is then loaded using the well known pandas read_csv(). The train set 42000 rows and 785 columns( including labels) and the test set has 28000 rows and 784 columns. As known, the test set is not supposed to have the labels.</p>
+
+<p>After importing the data sets, the label column from the train set is saved as another data frame, where as it is dropped from the original train set. This is merely done due to input requirements of the fit() function which takes the data &amp; the labels separately during the model training phase.</p>
+
+<h2 id="distribution-of-training-data-among-classes">Distribution of Training data among Classes</h2>
+
+<p>The training data seems to be distributed equally among the classes ranging from 0 - 9.</p>
+
+<h2 id="checking-for-null-data">Checking for Null Data</h2>
+
+<p>We checked for null data, but did not find any. No further actions taken in this regard.</p>
+
+<h2 id="normalization">Normalization</h2>
+
+<p>We perform a gray scale normalization to reduce the effect of illumination’s differences. Moreover the CNN converge faster when pixel values ranges in [0, 1] rather than on [0, 255].</p>
+
+<h2 id="reshape">Reshape</h2>
+
+<p>Train and test images has been stock into pandas dataframe as 1D vectors of 784 values. We reshape all data to (28x28x1) 3D matrices. Keras(with TensorFlow back end) requires an extra dimension in the end which correspond to channels. MNIST images are gray scaled so it use only one channel. Had it been colored or RGB images containing 3 channels each corresponding to Red, Green &amp; Blue, we would have reshaped 784 vectors to (28x28x3) 3D matrices.</p>
+
+<h2 id="label-encoding">Label Encoding</h2>
+
+<p>Labels are 10 digits numbers from 0 to 9. We need to encode these labels to one hot vectors.</p>
+
+<h2 id="splitting-the-train-set">Splitting the Train Set</h2>
+
+<p>Next we split the train set into train and test in the ratio of 9:1. This 10% set will act as the validation set, to prevent our model from over fitting on the train set.</p>
+
+<h3 id="cnn-modelling--evaluation">CNN Modelling &amp; Evaluation</h3>
+
+<p>The first is the convolution (Conv2D) layer. It is like a set of learnable filters. We chose to set 64 filters for the two firsts Conv2D layers and 64 filters for the lat one. Each filter transforms a part of the image as defined by the kernel size(3x3) using the kernel filter. The kernel filter matrix is applied on the whole image. Filters are used to transform the image.</p>
+
+<p>The CNN can isolate features that are useful everywhere from these transformed images (feature maps).</p>
+
+<p>The second important layer in CNN is the pooling (MaxPool2D) layer. This layer simply acts as a down sampling filter. It looks at the 2 neighboring pixels and picks the maximal value. These are used to reduce computational cost, and to some extent also reduces over fitting. We chose the pooling size as (2x2).</p>
+
+<p>Combining convolution and pooling layers, CNN are able to combine local features and learn more global features of the image.</p>
+
+<p>Dropout is a regularization method, where a proportion of nodes in the layer are randomly ignored (setting their weights to zero) for each training sample. This drops randomly a proportion of the network and forces the network to learn features in a distributed way. This technique also improves generalization and reduces the over fitting.</p>
+
+<p>‘relu’ is the rectified linear activation function Mathematically it can be defined as f(x) = max(0,x). The activation function is used to add non linearity to the network.</p>
+
+<p>The Flatten layer is use to convert the final feature maps into a one single 1D vector. This flattening step is needed so that you can make use of fully connected layers after some convolution/maxpool layers. It combines all the found local features of the previous convolution layers.</p>
+
+<p>In the end, two fully-connected (Dense) layers are used which are just artificial an neural networks (ANN). In the last dense layer, ‘softmax’ activation is used which is used to output distribution of probability of each class.</p>
+
+<p>Here is the Sequential model created:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model= tf.keras.models.Sequential(
+    [tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = 'relu', input_shape = (28,28,1)),
+     tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = 'relu'),
+     tf.keras.layers.MaxPooling2D(2, 2),
+     tf.keras.layers.Dropout(.25),
+     tf.keras.layers.Conv2D(filters = 64, kernel_size = (3,3), activation = 'relu'),
+     tf.keras.layers.MaxPooling2D(2,2),
+     tf.keras.layers.Flatten(),
+     tf.keras.layers.Dense(128, activation='relu'),
+     tf.keras.layers.Dense(10, activation='softmax')]
+)
+</code></pre></div></div>
+<h2 id="loss-function--optimizer">Loss Function &amp; Optimizer</h2>
+
+<p>We choose the loss function as ‘categorical cross entropy’ as the number of categorical classifications is more than 2. The loss function is the error rate between the observed labels and the predicted ones.</p>
+
+<p>We used the Adam Optimizer for this particular problem.</p>
+
+<h2 id="model-summary">Model Summary</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.summary()
+
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 26, 26, 64)        640       
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 24, 24, 64)        36928     
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 12, 12, 64)        0         
+_________________________________________________________________
+dropout (Dropout)            (None, 12, 12, 64)        0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 10, 10, 64)        36928     
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1600)              0         
+_________________________________________________________________
+dense (Dense)                (None, 128)               204928    
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                1290      
+=================================================================
+Total params: 280,714
+Trainable params: 280,714
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div></div>
+<h2 id="train-the-model">Train the model</h2>
+
+<p>The fit function is responsible for training the model. It takes as input the train data as x and the labels as y. In addition to this, we use a validation set as discussed earlier. In addition to this choose batch size as 100, epochs = 24 and verbose = 2. We trained the model using the GPU available on Google Colab.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.fit(X_train, Y_train,validation_data=(X_test, Y_test), batch_size=100, epochs=24, verbose=2)
+</code></pre></div></div>
+<h3 id="result-prediction--analysis">Result Prediction &amp; Analysis</h3>
+
+<p>After training the model, at the 24th epoch, the training accuracy is 99.8% and the validation accuracy is 98.9%. This shows that our model did not over fit much. Accuracy can be further improved if Data Augmentation is performed.</p>
+
+<h2 id="confusion-matrix">Confusion Matrix</h2>
+
+<p>We plot the confusion matrix and found out some errors made during classification task performed on the validation set. It seems that our CNN has some little troubles with the 4 digits, hey are mis-classified as 9. Sometime it is very difficult to catch the difference between 4 and 9 when curves are smooth.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, cm[i, j],
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] &gt; thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+# Predict the values from the validation dataset
+Y_pred = model.predict(X_test)
+# Convert predictions classes to one hot vectors 
+Y_pred_classes = np.argmax(Y_pred,axis = 1)
+# Convert validation observations to one hot vectors
+Y_true = np.argmax(Y_test,axis = 1)   
+# compute the confusion matrix
+confusion_mtx = confusion_matrix(Y_true, Y_pred_classes) 
+# plot the confusion matrix
+plot_confusion_matrix(confusion_mtx, classes = range(10)) 
+</code></pre></div></div>
+<p>Please access the <a href="https://github.com/saptarshidatta96/DigitRecognizerCNN">GitHub</a> Repository to view the code. It’s self Explanatory along with the description given here.</p>
+
+<p>© 2020 Saptarshi Datta. All Rights Reserved.</p>
+
+  </div><a class="u-url" href="/2020/08/31/Digit-Recognizer-CNN.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/saptarshidatta96" title="saptarshidatta96"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/ds_saptarshi" title="ds_saptarshi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
