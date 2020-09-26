@@ -18,7 +18,7 @@ In this challenge, we ask you to build a predictive model that answers the quest
 # Data Dictionary:
 | Variable     |  Definition     | Key     |
 | :------------- | :----------: | -----------: |
-|  Survival | Survival   | 0 : No, 1 = yes|
+| Survival | Survival   | 0 : No, 1 = yes|
 | pclass   | Ticket Class | 1st, 2nd, 3rd |
 
 
