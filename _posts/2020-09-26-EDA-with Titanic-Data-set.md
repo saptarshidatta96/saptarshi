@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 The Titanic data set is a famous data set that beginners in Machine Learning always refer to. However, the data set presents some interesting EDA opportunities which can be applied towards further complex problems.
 
@@ -26,5 +26,3 @@ pclass: This variable is a proxy for socio-economic status (SES)
 - 2nd = Middle
 
 - 3rd = Lower
-
-
