@@ -1,5 +1,5 @@
 ---
 layout: page
-title: Knowledge Base
+title: CV
 permalink: /cv/
 ---
