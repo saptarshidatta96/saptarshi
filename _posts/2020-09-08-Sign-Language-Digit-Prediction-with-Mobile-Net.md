@@ -3,7 +3,7 @@ layout: post
 title: Sign Language Prediction with MobileNet - Literature
 published: true
 ---
-In the last [post](https://git.saptarshidatta.in/Transfer-Learning-with-VGG-16/), we applied Transfer Learning in the VGG-16 Model with the Cat vs Dogs data set. However the application was minimal as we only changed the last output layer from a 'softmax' actiavted outpur to a 'sigmoid' activated output. Additionally, the VGG-16 model was already trained on the ImageNet Data, which originally had imaged of cats and dogs. We jist trained the last dense layer which predicted whether the image is og a cat or a dog.
+In the last [post](https://saptarshidatta.in/2020/09/06/Transfer-Learning-with-VGG-16.html), we applied Transfer Learning in the VGG-16 Model with the Cat vs Dogs data set. However the application was minimal as we only changed the last output layer from a 'softmax' actiavted outpur to a 'sigmoid' activated output. Additionally, the VGG-16 model was already trained on the ImageNet Data, which originally had imaged of cats and dogs. We jist trained the last dense layer which predicted whether the image is og a cat or a dog.
 
 However, in this exercise we shall again apply transfer learning to predict the Numeric Sign Language. We will be applying MobileNet Model and shall modify the model and then fine tune it to suit our requirements. But before that, let's discuss a bit about the MobileNet Model.
 
