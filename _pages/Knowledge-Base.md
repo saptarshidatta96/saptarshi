@@ -2,6 +2,7 @@
 layout: page
 title: Knowledge Base
 permalink: /kb/
+published: true
 ---
 # Classical Machine Learning
 
@@ -36,3 +37,5 @@ Here are a few materials:
 - Deep Learning Tutorial on Kaggle
 
 - TensorFlow channel on YouTube
+
+- Deeplizard.com provided end to end high end tutorials on Deep Learing with Keras, TensorFlow and Pytorch. Make sure to watch it.
