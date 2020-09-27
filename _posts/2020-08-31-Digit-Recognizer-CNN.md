@@ -169,6 +169,5 @@ confusion_mtx = confusion_matrix(Y_true, Y_pred_classes)
 # plot the confusion matrix
 plot_confusion_matrix(confusion_mtx, classes = range(10)) 
 ```
-Please access the [GitHub](https://github.com/saptarshidatta96/DigitRecognizerCNN) Repository to view the code. It's self Explanatory along with the description given here.
+Please access the [Code](https://saptarshidatta.in/2020/08/31/Digit-Recognizer-CNN.html) associated with this post. It's self Explanatory along with the Literature given here.
 
-© 2020 Saptarshi Datta. All Rights Reserved.
