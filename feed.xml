@@ -1,4 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://saptarshidatta.in/feed.xml" rel="self" type="application/atom+xml" /><link href="https://saptarshidatta.in/" rel="alternate" type="text/html" /><updated>2020-09-26T23:59:26-05:00</updated><id>https://saptarshidatta.in/feed.xml</id><title type="html">Saptarshi Datta</title><entry><title type="html">Sign Language Prediction with MobileNet - Code</title><link href="https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html" rel="alternate" type="text/html" title="Sign Language Prediction with MobileNet - Code" /><published>2020-09-08T00:00:00-05:00</published><updated>2020-09-08T00:00:00-05:00</updated><id>https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction</id><content type="html" xml:base="https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html">&lt;!--
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://saptarshidatta.in/feed.xml" rel="self" type="application/atom+xml" /><link href="https://saptarshidatta.in/" rel="alternate" type="text/html" /><updated>2020-09-27T00:05:22-05:00</updated><id>https://saptarshidatta.in/feed.xml</id><title type="html">Saptarshi Datta</title><entry><title type="html">Resume</title><link href="https://saptarshidatta.in/2020/09/27/Resume.html" rel="alternate" type="text/html" title="Resume" /><published>2020-09-27T00:00:00-05:00</published><updated>2020-09-27T00:00:00-05:00</updated><id>https://saptarshidatta.in/2020/09/27/Resume</id><content type="html" xml:base="https://saptarshidatta.in/2020/09/27/Resume.html">&lt;p&gt;Professional Member - &lt;a href=&quot;http://member.acm.org/~saptarshidatta&quot;&gt;&lt;span class=&quot;underline&quot;&gt;Association of Computing Machinery&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://www.linkedin.com/in/saptarshi-datta-2b5b70aa/&quot;&gt;&lt;span class=&quot;underline&quot;&gt;Linked IN&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/saptarshidatta96&quot;&gt;&lt;span class=&quot;underline&quot;&gt;GitHub&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://saptarshidatta.in/home&quot;&gt;&lt;span class=&quot;underline&quot;&gt;Website&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;career-objective&quot;&gt;Career Objective&lt;/h1&gt;
+
+&lt;h1 id=&quot;to-work-in-a-challenging-and-motivating-career-that-provides-an-opportunity-to-work-with-the-latest-technologies&quot;&gt;To work in a challenging and motivating career that provides an opportunity to work with the latest technologies.&lt;/h1&gt;
+
+&lt;h1 id=&quot;skills&quot;&gt;SKILLS&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Machine Learning:&lt;/strong&gt; Classification, Regression, Clustering, Decision Trees&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Deep Learning:&lt;/strong&gt; Forward Propagation, Backward propagation, Hyper parameter Tuning, Regularization &amp;amp; Optimization, CNN &amp;amp; RNN models. Experience with Keras API (Tensorflow Backend) snd PyTorch.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Statistical Methods:&lt;/strong&gt; Predictive Analysis &amp;amp; Hypothesis Testing, Principal Component Analysis and dimensionality reduction techniques, Market Basket Analysis&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Programming Languages:&lt;/strong&gt; R, Python&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Big Data Language:&lt;/strong&gt; Hadoop&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Scripting Language:&lt;/strong&gt; Unix&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Database Language:&lt;/strong&gt; SQL&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Extraction Tool:&lt;/strong&gt; Informatica PowerCenter, IBM Infosphere DataStage&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Reporting Tool:&lt;/strong&gt; Tableau&lt;/p&gt;
+
+&lt;h1 id=&quot;experience&quot;&gt;EXPERIENCE&lt;/h1&gt;
+
+&lt;h2 id=&quot;tata-consultancy-serviceskolkata---assistant-systems-engineer&quot;&gt;Tata Consultancy Services, Kolkata &lt;em&gt;- Assistant Systems Engineer&lt;/em&gt;&lt;/h2&gt;
+
+&lt;p&gt;November 2018 - PRESENT&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ROLE:&lt;/strong&gt; ETL Developer - Informatica PowerCenter&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Client: Confidential (A major Financial Services Company in BFSI Segment)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;● Assisted during the designing and development phase of complex ETL structures for transformation of data sources into data warehouses.&lt;/p&gt;
+
+&lt;p&gt;● Analysed database designs, system integration processes and Source to Target Mappings to make suggestions for further enhancements&lt;/p&gt;
+
+&lt;p&gt;● Implemented procedures for validation, reconciliation of metadata and error handling in ETL processes&lt;/p&gt;
+
+&lt;p&gt;● Resolved problems relating to ETL applications and data issues.&lt;/p&gt;
+
+&lt;p&gt;● Suggested improvements in processes for managing data integrity and quality for overall enterprise&lt;/p&gt;
+
+&lt;p&gt;● Designed and implemented processes for manual loading of catch up loads including scheduling and unscheduling of jobs taking care of dependencies between various jobs.&lt;/p&gt;
+
+&lt;h1 id=&quot;projects&quot;&gt;PROJECTS&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;h2 id=&quot;creation-of-an-india-credit-risk-default-model-using-logistic-regression&quot;&gt;Creation of an India Credit Risk Default Model Using Logistic Regression&lt;/h2&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The project involved developing a credit risk default model using a given data which had to be checked for outliers, missing values, multicollinearity etc. Univariate and Bivariate Analysis had to be conducted and the model had to be built using Logistic Regression on most important variables. Model Performance Measures were undertaken that included predicting the accuracy of the model on certain datasets.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Tools&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Logistic Regression, Univariate &amp;amp; Bivariate Analysis, Outlier Treatment, Model Performance Measures&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;h2 id=&quot;visualizing-car-insurance-claims-using-tableau&quot;&gt;Visualizing Car Insurance Claims using Tableau&lt;/h2&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This project explored the art of problem-solving with the aid of visual analytics. Tableau’s data visualization tools were used to create interactive dashboards to provide high-level insights to an Insurance company to drive the company’s car insurance schemes.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Tools&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Data Visualization, Tableau, Business Intelligence&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;certifications&quot;&gt;CERTIFICATIONS&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;Python for Data Science and Machine Learning Bootcamp, Udemy&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- end list --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;Deep Learning Specialization, Coursera&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;EDUCATION&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Great Lakes Institute of Management&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Post Graduate Program - Business Analytics &amp;amp; Business Intelligence&lt;/p&gt;
+
+&lt;p&gt;(May 2019 – May 2020)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Maulana Abul Kalam Azad University of Technology, West Bengal&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bachelor’s Degree in Electrical Engineering, DGPA: 8.46/10&lt;/p&gt;
+
+&lt;p&gt;(August 2014 – June 2018)&lt;/p&gt;</content><author><name></name></author><summary type="html">Professional Member - Association of Computing Machinery</summary></entry><entry><title type="html">Sign Language Prediction with MobileNet - Code</title><link href="https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html" rel="alternate" type="text/html" title="Sign Language Prediction with MobileNet - Code" /><published>2020-09-08T00:00:00-05:00</published><updated>2020-09-08T00:00:00-05:00</updated><id>https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction</id><content type="html" xml:base="https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html">&lt;!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
