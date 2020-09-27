@@ -1,5 +1,5 @@
 ---
 layout: page
 title: CV
-permalink: /kb/
+permalink: /cv/
 ---
