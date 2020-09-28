@@ -105,5 +105,8 @@ A number of interesting yet relatable insights were found:
 
 - it appears that most men were helping women, children and elderly and other less able passengers to board off the ship and in turn minimized their own chances of survival, leading to 81% male casualties
 
+# Code
 
-Please go through the [Code](https://saptarshidatta.in/2020/08/01/Titanic-Data-EDA.html) associated with this post. It's self-expalnatory along with this literature.
+The Jupyter notebook for the entire exercise is available at this [link](https://saptarshidatta.in/2020/08/01/Titanic-Data-EDA.html), with options to view and run the code on Google Collab!
+
+Please check it out.
