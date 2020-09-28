@@ -111,4 +111,4 @@ Confusion matrix, without normalization
  [0 0 0 0 0 0 0 0 0 5]]
 ```
 Our model has performed excellent on the Test batch with only one error.
-Please view the published [code](https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html)associated with this post.
+Please view the published [code](https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html) associated with this post.
