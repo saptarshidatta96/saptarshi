@@ -13,7 +13,7 @@ On April 15, 1912, during her maiden voyage, the widely considered “unsinkable
 
 While there was some element of luck involved in surviving, it seems some groups of people were more likely to survive than others.
 
-In this challenge, we ask you to build a predictive model that answers the question: “what sorts of people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic class, etc).
+In this article, we perform an Exploratory Data Analysis(EDA) which will show trends on what sorts of people were more likely to survive. We will passenger data (ie name, age, gender, socio-economic class, etc) obtained from [Kaggle](https://www.kaggle.com/c/titanic).
 
 # Data Dictionary:
 ![]({{site.baseurl}}/images/data%20dictionary.JPG)
@@ -57,7 +57,7 @@ The following Feature Engineering tasks were done.
 
 - Expanded the acronym C, S, Q for the Embarked Variable with Cherbourg, Southampton & Queenstown respectively
 
-- Expanded the acronym 1,2,3 for the Pclass Variable with !st Class, 2nd Class & 3rd Class respectively
+- Expanded the acronym 1,2,3 for the Pclass Variable with 1st Class, 2nd Class & 3rd Class respectively
 
 - determined whether a passenger is a minor depending on his/her age(age <18) and stored that in a different variable.
 
@@ -79,7 +79,7 @@ The following Feature Engineering tasks were done.
  
 Let's start with the summary of ideas that will be presented in the notebook:
 
-The data set from data quality point of view has some missing data, but they do not impact the analysis that much as we will feature engineer these variables and also derive some other variables from these variables that will result in much clear analysis. Although there is a discrepancy between the number of tickets and passengers(it looks like a single ticket was shared among multiple passengers) and the sum of the records (training plus test datasets). There has also been no information regarding the crew members with their details, so nothing is known about them, but the goal of the analysis is to predict which passengers survived.
+The data set from the data quality point of view has some missing data, but they do not impact the analysis that much as we have feature engineered these variables and also derived some other variables from these variables that resulted in a clear analysis. Although there is a discrepancy between the number of tickets and passengers(it looks like a single ticket was shared among multiple passengers) and the sum of the records (training and test datasets). There has also been no information regarding the crew members with their details, so nothing is known about them, but the goal of the analysis is to determine the factors why some passengers survived.
 
 A number of interesting yet relatable insights were found:
 
@@ -87,7 +87,7 @@ A number of interesting yet relatable insights were found:
 
 - most adult men between the ages 18 and 65 did not survive (even though we have a percentage of data where the age is not known and we used missing value imputation.)
 
-- first class passengers were given or automatically got priority over the other classes
+- first class passengers were given or automatically got priority over the other classes in getting rescued.
 
 - Fare is a misleading feature and cannot be easily correlated to survival, as it is linked to few other features like Passenger class, Cabin and Ticket
 
@@ -99,7 +99,7 @@ A number of interesting yet relatable insights were found:
 
 - we found passengers passengers who have traveled with a ticket priced £0.00 across all three classes
 
-- to sum it up,first class female passengers stood a better chance of surviving
+- to sum it up, first class female passengers stood a better chance of surviving
 
 - those that traveled with a company i.e. family or friend had a higher chance of survival than those who traveled by themselves, although ones with less able dependents suffered to a visible degree
 
