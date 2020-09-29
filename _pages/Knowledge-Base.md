@@ -4,6 +4,16 @@ title: Knowledge Base
 permalink: /kb/
 published: true
 ---
+## Concepts
+
+1. [Missing Value Treatment](https://sites.google.com/view/saptarshidatta/kb/missing-value-treatment?authuser=0)
+2. [Data Scaling & Normalization](https://sites.google.com/view/saptarshidatta/kb/data-scaling-normalization?authuser=0)
+3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/kb/hypothesis-testing?authuser=0)
+4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/kb/parameter-optimization-in-neural-networks)
+5. [Optimizer](https://sites.google.com/view/saptarshidatta/kb/optimizer)
+
+## Books
+
 # Classical Machine Learning
 
 Machine learning (ML) is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. It is the science of getting computers to act without being explicitly programmed.
@@ -39,11 +49,3 @@ Here are a few materials:
 - TensorFlow channel on YouTube
 
 - Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
-
-# Concepts
-
-1. [Missing Value Treatment](https://sites.google.com/view/saptarshidatta/kb/missing-value-treatment?authuser=0)
-2. [Data Scaling & Normalization](https://sites.google.com/view/saptarshidatta/kb/data-scaling-normalization?authuser=0)
-3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/kb/hypothesis-testing?authuser=0)
-4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/kb/parameter-optimization-in-neural-networks)
-5. [Optimizer](https://sites.google.com/view/saptarshidatta/kb/optimizer)
