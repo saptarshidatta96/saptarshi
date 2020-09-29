@@ -9,6 +9,7 @@ In this exercise we shall again apply transfer learning to predict the Numeric S
 Click here to view the [code](https://saptarshidatta.in/2020/09/08/Sign-Language-Prediction.html).
 
 - Tools
+
 TensorFlow, Transfer Learning, CNN, Google Collab Notebook
 
 ## MNIST Digit Recognizer using CNN
@@ -16,6 +17,7 @@ MNIST (“Modified National Institute of Standards and Technology”) is the de-
 Click here to view the [code](https://saptarshidatta.in/2020/08/01/Titanic-Data-EDA.html).
 
 - Tools
+
 TensorFlow, CNN, Google Collab Notebooks
 
 ## Exploratory Data Analysis - Titanic data set(Kaggle)
