@@ -12,9 +12,8 @@ published: true
 4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/kb/parameter-optimization-in-neural-networks)
 5. [Optimizer](https://sites.google.com/view/saptarshidatta/kb/optimizer)
 
-## Books
 
-# Classical Machine Learning
+## Classical Machine Learning
 
 Machine learning (ML) is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. It is the science of getting computers to act without being explicitly programmed.
 
@@ -34,7 +33,7 @@ Here are a few materials:
 
 - Python for Data Science. Taking some Udemy course will help.
 
-# Deep Learning
+## Deep Learning
 
 Deep Learning is a sub field of machine learning concerned with algorithms inspired by the structure and function of the brain called artificial neural networks.
 
