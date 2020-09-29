@@ -5,7 +5,7 @@ published: true
 ---
 MNIST ("Modified National Institute of Standards and Technology") is the de-facto “hello world” data set of computer vision. Since its release in 1999, this classic data set of handwritten images has served as the basis for bench marking classification algorithms. As new machine learning techniques emerge, MNIST remains a reliable resource for researchers and learners alike.
 
-In this competition, your goal is to correctly identify digits from a data set of tens of thousands of handwritten images. We’ve curated a set of tutorial-style kernels which cover everything from regression to neural networks. We encourage you to experiment with different algorithms to learn first-hand what works well and how techniques compare.
+In this exercise, the goal is to correctly identify digits from a data set of tens of thousands of handwritten images.
 
 This Notebook contains three main parts:
 
@@ -17,7 +17,7 @@ This Notebook contains three main parts:
 
 ### Data Preparation
 
-The Google Drive is mounted on the Google Colab Notebook. The train & test data is then loaded using the well known pandas read_csv(). The train set 42000 rows and 785 columns( including labels) and the test set has 28000 rows and 784 columns. As known, the test set is not supposed to have the labels.
+The Google Drive is mounted on the Google Colab Notebook. The train & test data is then loaded using the well known pandas `read_csv()`. The train set 42000 rows and 785 columns( including labels) and the test set has 28000 rows and 784 columns. As known, the test set is not supposed to have the labels.
 
 After importing the data sets, the label column from the train set is saved as another data frame, where as it is dropped from the original train set. This is merely done due to input requirements of the fit() function which takes the data & the labels separately during the model training phase.
 
