@@ -46,3 +46,4 @@ Here are a few materials:
 2. [Data Scaling & Normalization](https://sites.google.com/view/saptarshidatta/kb/data-scaling-normalization?authuser=0)
 3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/kb/hypothesis-testing?authuser=0)
 4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/kb/parameter-optimization-in-neural-networks)
+5. [Optimizer](https://sites.google.com/view/saptarshidatta/kb/optimizer)
