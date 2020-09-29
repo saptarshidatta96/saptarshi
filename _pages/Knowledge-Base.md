@@ -38,4 +38,4 @@ Here are a few materials:
 
 - TensorFlow channel on YouTube
 
-- Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and Pytorch. Make sure to watch it.
+- Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
