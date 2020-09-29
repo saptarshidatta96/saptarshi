@@ -39,8 +39,3 @@ Here are a few materials:
 - TensorFlow channel on YouTube
 
 - Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and Pytorch. Make sure to watch it.
-
-| Command | Description |
-| --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
