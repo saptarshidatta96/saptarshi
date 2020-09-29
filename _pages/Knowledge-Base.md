@@ -39,3 +39,10 @@ Here are a few materials:
 - TensorFlow channel on YouTube
 
 - Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
+
+# Concepts
+
+1. [Missing Value Treatment](https://sites.google.com/view/saptarshidatta/kb/missing-value-treatment?authuser=0)
+2. [Data Scaling & Normalization](https://sites.google.com/view/saptarshidatta/kb/data-scaling-normalization?authuser=0)
+3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/kb/hypothesis-testing?authuser=0)
+4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/kb/parameter-optimization-in-neural-networks)
