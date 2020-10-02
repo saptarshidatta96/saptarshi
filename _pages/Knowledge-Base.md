@@ -6,11 +6,11 @@ published: true
 ---
 ## Concepts
 
-1. [Missing Value Treatment](https://sites.google.com/view/saptarshidatta/kb/missing-value-treatment?authuser=0)
-2. [Data Scaling & Normalization](https://sites.google.com/view/saptarshidatta/kb/data-scaling-normalization?authuser=0)
-3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/kb/hypothesis-testing?authuser=0)
-4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/kb/parameter-optimization-in-neural-networks)
-5. [Optimizer](https://sites.google.com/view/saptarshidatta/kb/optimizer)
+1. [Missing Value Treatment](https://kb.saptarshidatta.in/knowledge-base/missing-value-treatment)
+2. [Data Scaling & Normalization](https://kb.saptarshidatta.in/knowledge-base/data-scaling-normalization)
+3. [Hypothesis Testing](https://kb.saptarshidatta.in/knowledge-base/hypothesis-testing)
+4. [Parameter Optimization in Neural Networks](https://kb.saptarshidatta.in/knowledge-base/parameter-optimization-in-neural-networks)
+5. [Optimizer](https://kb.saptarshidatta.in/knowledge-base/optimizer)
 
 
 ## Classical Machine Learning
