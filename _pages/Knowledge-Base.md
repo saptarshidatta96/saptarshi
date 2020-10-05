@@ -4,7 +4,16 @@ title: Knowledge Base
 permalink: /kb/
 published: true
 ---
-# Classical Machine Learning
+## Concepts
+
+1. [Missing Value Treatment](https://sites.google.com/view/saptarshidatta/knowledge-base/missing-value-treatment)
+2. [Data Scaling & Normalization](https://sites.google.com/view/saptarshidatta/knowledge-base/data-scaling-normalization)
+3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/knowledge-base/hypothesis-testing)
+4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/knowledge-base/parameter-optimization-in-neural-networks)
+5. [Optimizer](https://sites.google.com/view/saptarshidatta/knowledge-base/optimizer)
+
+
+## Classical Machine Learning
 
 Machine learning (ML) is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. It is the science of getting computers to act without being explicitly programmed.
 
@@ -24,7 +33,7 @@ Here are a few materials:
 
 - Python for Data Science. Taking some Udemy course will help.
 
-# Deep Learning
+## Deep Learning
 
 Deep Learning is a sub field of machine learning concerned with algorithms inspired by the structure and function of the brain called artificial neural networks.
 
@@ -38,4 +47,4 @@ Here are a few materials:
 
 - TensorFlow channel on YouTube
 
-- Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and Pytorch. Make sure to watch it.
+- Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
