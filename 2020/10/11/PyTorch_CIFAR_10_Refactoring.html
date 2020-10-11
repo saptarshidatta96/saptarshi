@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      5 min read
     
 </span></p>
 
@@ -379,13 +379,13 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_set</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transform</span> <span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))])</span>
+
+<span class="n">train_set</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
     <span class="n">root</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span>
     <span class="p">,</span><span class="n">train</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">,</span><span class="n">download</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">,</span><span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
-        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span>
-    <span class="p">])</span>
+    <span class="p">,</span><span class="n">transform</span><span class="o">=</span><span class="n">transform</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -424,19 +424,20 @@ window.onload = wrap_img;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
-    <span class="n">lr</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="mi">01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]</span>
-    <span class="p">,</span><span class="n">batch_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="mi">01</span><span class="p">]</span>
+    <span class="p">,</span><span class="n">batch_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">]</span>
     <span class="p">,</span><span class="n">shuffle</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span>
+    <span class="p">,</span><span class="n">num_workers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">RunManager</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">RunBuilder</span><span class="o">.</span><span class="n">get_runs</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
 
     <span class="n">network</span> <span class="o">=</span> <span class="n">Network</span><span class="p">()</span>
-    <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">run</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="n">run</span><span class="o">.</span><span class="n">shuffle</span><span class="p">)</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">run</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="n">run</span><span class="o">.</span><span class="n">shuffle</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">run</span><span class="o">.</span><span class="n">num_workers</span><span class="p">)</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">run</span><span class="o">.</span><span class="n">lr</span><span class="p">)</span>
     
     <span class="n">m</span><span class="o">.</span><span class="n">begin_run</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">m</span><span class="o">.</span><span class="n">begin_epoch</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
             
@@ -492,6 +493,7 @@ window.onload = wrap_img;
       <th>lr</th>
       <th>batch_size</th>
       <th>shuffle</th>
+      <th>num_workers</th>
     </tr>
   </thead>
   <tbody>
@@ -499,241 +501,79 @@ window.onload = wrap_img;
       <th>0</th>
       <td>1</td>
       <td>1</td>
-      <td>1.766828</td>
-      <td>0.33092</td>
-      <td>16.010722</td>
-      <td>16.232718</td>
-      <td>0.010</td>
-      <td>100</td>
+      <td>1.869639</td>
+      <td>0.30556</td>
+      <td>18.566388</td>
+      <td>20.198124</td>
+      <td>0.01</td>
+      <td>1000</td>
       <td>True</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>1.519231</td>
-      <td>0.44906</td>
-      <td>16.379714</td>
-      <td>32.724761</td>
-      <td>0.010</td>
-      <td>100</td>
+      <td>1</td>
+      <td>1.967650</td>
+      <td>0.26044</td>
+      <td>16.305351</td>
+      <td>18.226968</td>
+      <td>0.01</td>
+      <td>1000</td>
       <td>True</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1</td>
       <td>3</td>
-      <td>1.456742</td>
-      <td>0.47634</td>
-      <td>16.447227</td>
-      <td>49.278241</td>
-      <td>0.010</td>
-      <td>100</td>
+      <td>1</td>
+      <td>1.930892</td>
+      <td>0.27954</td>
+      <td>15.927075</td>
+      <td>18.112834</td>
+      <td>0.01</td>
+      <td>1000</td>
       <td>True</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1</td>
       <td>4</td>
-      <td>1.433824</td>
-      <td>0.48748</td>
-      <td>16.522049</td>
-      <td>65.909568</td>
-      <td>0.010</td>
-      <td>100</td>
+      <td>1</td>
+      <td>1.850479</td>
+      <td>0.30830</td>
+      <td>16.800490</td>
+      <td>19.740744</td>
+      <td>0.01</td>
+      <td>1000</td>
       <td>True</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1</td>
       <td>5</td>
-      <td>1.387163</td>
-      <td>0.50962</td>
-      <td>16.549969</td>
-      <td>82.574042</td>
-      <td>0.010</td>
-      <td>100</td>
+      <td>1</td>
+      <td>1.822490</td>
+      <td>0.32622</td>
+      <td>17.848449</td>
+      <td>21.122425</td>
+      <td>0.01</td>
+      <td>1000</td>
       <td>True</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>2</td>
+      <td>6</td>
       <td>1</td>
-      <td>2.154447</td>
-      <td>0.18388</td>
-      <td>14.927786</td>
-      <td>16.515787</td>
-      <td>0.010</td>
+      <td>1.865499</td>
+      <td>0.30920</td>
+      <td>19.867091</td>
+      <td>24.908000</td>
+      <td>0.01</td>
       <td>1000</td>
       <td>True</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2</td>
-      <td>2</td>
-      <td>1.863616</td>
-      <td>0.30586</td>
-      <td>15.019241</td>
-      <td>31.637032</td>
-      <td>0.010</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2</td>
-      <td>3</td>
-      <td>1.653237</td>
-      <td>0.38942</td>
-      <td>14.963688</td>
-      <td>46.707006</td>
-      <td>0.010</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2</td>
-      <td>4</td>
-      <td>1.523028</td>
-      <td>0.44138</td>
-      <td>15.089503</td>
-      <td>61.910706</td>
-      <td>0.010</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2</td>
-      <td>5</td>
-      <td>1.445244</td>
-      <td>0.47474</td>
-      <td>15.259337</td>
-      <td>77.289368</td>
-      <td>0.010</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>3</td>
-      <td>1</td>
-      <td>1.849074</td>
-      <td>0.32016</td>
-      <td>16.719428</td>
-      <td>16.938964</td>
-      <td>0.001</td>
-      <td>100</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>3</td>
-      <td>2</td>
-      <td>1.555214</td>
-      <td>0.43706</td>
-      <td>16.735265</td>
-      <td>33.790480</td>
-      <td>0.001</td>
-      <td>100</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>3</td>
-      <td>3</td>
-      <td>1.457273</td>
-      <td>0.47614</td>
-      <td>16.847899</td>
-      <td>50.757400</td>
-      <td>0.001</td>
-      <td>100</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>3</td>
-      <td>4</td>
-      <td>1.382204</td>
-      <td>0.50384</td>
-      <td>16.713528</td>
-      <td>67.586832</td>
-      <td>0.001</td>
-      <td>100</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>3</td>
-      <td>5</td>
-      <td>1.322751</td>
-      <td>0.52808</td>
-      <td>16.755784</td>
-      <td>84.462120</td>
-      <td>0.001</td>
-      <td>100</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>4</td>
-      <td>1</td>
-      <td>2.139581</td>
-      <td>0.21774</td>
-      <td>15.687570</td>
-      <td>17.257778</td>
-      <td>0.001</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>4</td>
-      <td>2</td>
-      <td>1.928706</td>
-      <td>0.30408</td>
-      <td>15.732626</td>
-      <td>33.104630</td>
-      <td>0.001</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>4</td>
-      <td>3</td>
-      <td>1.800440</td>
-      <td>0.35078</td>
-      <td>15.722479</td>
-      <td>48.943675</td>
-      <td>0.001</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>4</td>
-      <td>4</td>
-      <td>1.696727</td>
-      <td>0.38670</td>
-      <td>15.758723</td>
-      <td>64.817763</td>
-      <td>0.001</td>
-      <td>1000</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>4</td>
-      <td>5</td>
-      <td>1.629852</td>
-      <td>0.40896</td>
-      <td>15.809937</td>
-      <td>80.745112</td>
-      <td>0.001</td>
-      <td>1000</td>
-      <td>True</td>
+      <td>16</td>
     </tr>
   </tbody>
 </table>
@@ -748,6 +588,26 @@ window.onload = wrap_img;
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Experimenting-with-DataLoader-num_workers-attribute">Experimenting with DataLoader <code>num_workers</code> attribute<a class="anchor-link" href="#Experimenting-with-DataLoader-num_workers-attribute"> </a></h2><p>The <code>num_workers</code> attribute tells the data loader instance how many sub-processes to use for data loading. By default, the <code>num_workers</code> value is set to zero, and a value of zero tells the loader to load the data inside the main process.</p>
+<p>This means that the training process will work sequentially inside the main process. After a batch is used during the training process and another one is needed, we read the batch data from disk.</p>
+<p>Now, if we have a worker process, we can make use of the facility that our machine has multiple cores. This means that the next batch can already be loaded and ready to go by the time the main process is ready for another batch. This is where the speed up comes from. The batches are loaded using additional worker processes and are queued up in memory.</p>
+<p>The main take-away from these results is that having a single worker process in addition to the main process resulted in a speed up of about twenty percent. However, adding additional worker processes after the first one didn't really show any further improvements.</p>
+<p>Additionally, we can see with higher number of num_workers results in higher run times. Please go through this <a href="https://discuss.pytorch.org/t/guidelines-for-assigning-num-workers-to-dataloader/813/5">link</a> to know more.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary"> </a></h2><p>We have introduced a way to experiment with Hyperparameters to extract maximum efficiency for our model. This code can be scaled up or scaled down to change the Hyperparameters we wish to experiment upon.</p>
+<p>This may be noted that, accuracy is not that high as we have trained our model for 1 epoch with each set of parameters. This has been purely done for experimentation purpose.</p>
+<p>However, we might need to change our network architecture i.e. a deeper network for higher efficiency.</p>
+
+</div>
+</div>
+</div>
 </div>
 
 
