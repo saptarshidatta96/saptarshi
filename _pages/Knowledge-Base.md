@@ -47,8 +47,8 @@ Here are a few materials:
 
 - TensorFlow channel on YouTube
 
-- Deeplizard.com provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
+- [DeepLizard.com](https://deeplizard.com/) provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
 
-- [Series: YOLO object detector in PyTorch](https://blog.paperspace.com/tag/series-yolo/)
+- [Paperspace Blog](https://blog.paperspace.com/)
 
-- [YouTube](https://www.youtube.com/playlist?list=PL1GQaVhO4f_jLxOokW7CS5kY_J1t1T17S) playlist on Evolution of Object Detection Networks 
+- [YouTube](https://www.youtube.com/playlist?list=PL1GQaVhO4f_jLxOokW7CS5kY_J1t1T17S) playlist on Evolution of Object Detection Networks
