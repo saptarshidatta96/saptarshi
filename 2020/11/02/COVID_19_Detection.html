@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      32 min read
+      33 min read
     
 </span></p>
 
@@ -117,6 +117,18 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Recently, the UC San Diego open sourced a dataset containing lung CT Scan images of COVID-19 patients, the first of its kind in the public domain. In this post we will use PyTorch to build a classifier that takes the lung CT scan of a patient and classifies it as COVID-19 positive or negative.</p>
+<p>However, let me add a <strong>disclaimer</strong> at the very beginning:</p>
+<p>Let it be known that I am not a medical or radiology professional. My experience lies in machine learning, deep learning, and computer vision. Whatever I write comes from my limited knowledge of medical imaging. The results from this post should not be used in clinical studies or may be used at your own risk. I expect the code should be used to develop more robust classifiers that can be deployed in the real world.</p>
+<p>I have followed several examples to arrive at this result, references to which is published at the end of this post.</p>
+<p>Now, without wasting much time, let's jump into the code.
+We start by importing the libraries.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
