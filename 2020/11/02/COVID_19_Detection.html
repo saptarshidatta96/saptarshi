@@ -4,9 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Title | Saptarshi Datta</title>
+<title>CT Scan COVID-19 classifier using PyTorch | Saptarshi Datta</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Title" />
+<meta property="og:title" content="CT Scan COVID-19 classifier using PyTorch" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Deep Learning, Computer Vision &amp; more." />
 <meta property="og:description" content="Deep Learning, Computer Vision &amp; more." />
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-02T00:00:00-06:00" />
 <script type="application/ld+json">
-{"url":"https://saptarshidatta.in/2020/11/02/COVID_19_Detection.html","@type":"BlogPosting","headline":"Title","dateModified":"2020-11-02T00:00:00-06:00","datePublished":"2020-11-02T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saptarshidatta.in/2020/11/02/COVID_19_Detection.html"},"description":"Deep Learning, Computer Vision &amp; more.","@context":"https://schema.org"}</script>
+{"url":"https://saptarshidatta.in/2020/11/02/COVID_19_Detection.html","@type":"BlogPosting","headline":"CT Scan COVID-19 classifier using PyTorch","dateModified":"2020-11-02T00:00:00-06:00","datePublished":"2020-11-02T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saptarshidatta.in/2020/11/02/COVID_19_Detection.html"},"description":"Deep Learning, Computer Vision &amp; more.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saptarshidatta.in/feed.xml" title="Saptarshi Datta" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
@@ -71,13 +71,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Title</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-02T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">CT Scan COVID-19 classifier using PyTorch</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-02T00:00:00-06:00" itemprop="datePublished">
         Nov 2, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      33 min read
+      32 min read
     
 </span></p>
 
@@ -117,18 +117,6 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="CT-Scan-COVID-19-classifier-using-PyTorch">CT Scan COVID-19 classifier using PyTorch<a class="anchor-link" href="#CT-Scan-COVID-19-classifier-using-PyTorch"> </a></h2><p>Recently, the UC San Diego open sourced a dataset containing lung CT Scan images of COVID-19 patients, the first of its kind in the public domain. In this post we will use PyTorch to build a classifier that takes the lung CT scan of a patient and classifies it as COVID-19 positive or negative.</p>
-<p>However, let me add a <strong>disclaimer</strong> at the very beginning:</p>
-<p>Let it be known that I am not a medical or radiology professional. My experience lies in machine learning, deep learning, and computer vision. Whatever I write comes from my limited knowledge of medical imaging. The results from this post should not be used in clinical studies or may be used at your own risk. I expect the code should be used to develop more robust classifiers that can be deployed in the real world.</p>
-<p>I have followed several examples to arrive at this result, references to which is published at the end of this post.</p>
-<p>Now, without wasting much time, let's jump into the code.
-We start by importing the libraries.</p>
-
-</div>
-</div>
-</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
