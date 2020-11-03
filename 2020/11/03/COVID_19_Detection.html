@@ -352,6 +352,7 @@ We have a positive class with CT Scans of COVID-19 positive patients where as th
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="n">classes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">files_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">non_covid_files</span><span class="p">,</span> <span class="n">covid_files</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># read the files from data split text files</span>
@@ -364,8 +365,6 @@ We have a positive class with CT Scans of COVID-19 positive patients where as th
             <span class="n">class_files</span> <span class="o">=</span> <span class="p">[[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">cls_index</span><span class="p">],</span> <span class="n">x</span><span class="p">),</span> <span class="n">cls_index</span><span class="p">]</span> \
                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">read_txt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files_path</span><span class="p">[</span><span class="n">cls_index</span><span class="p">])]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span> <span class="o">+=</span> <span class="n">class_files</span>
-                
-        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_list</span><span class="p">)</span>
