@@ -23,11 +23,11 @@ Here are a few materials:
 
 - Head First Statistics  by Dawn Griffiths - Available at Safari Books Online
 
-- YouTube Channel - StatQuest with Josh Starmer is a good place to start.
+- YouTube Channel - [StatQuest](https://www.youtube.com/user/joshstarmer) with Josh Starmer is a good place to start.
 
 - Introduction to Statistical Learning in R (ISLR) by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani
 
-- YouTube video series of ISLR
+- YouTube video series of [ISLR](https://www.youtube.com/channel/UCB2p-jaoolkv0h22m4I9l9Q)
 
 - The Hundred-Page Machine Learning Book by Andriy Burkov. This book will provide a concise understanding of various ML Algorithms. It comes with a wiki with additional information like Q&A, code snippets, further reading, tools, and other relevant resources. Having a prior understanding of various ML Techniques is advised.
 
