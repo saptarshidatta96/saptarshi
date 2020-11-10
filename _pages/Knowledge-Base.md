@@ -39,7 +39,7 @@ Deep Learning is a sub field of machine learning concerned with algorithms inspi
 
 Here are a few materials:
 
-- Deep Learning Book by Ian Goodfellow, Yoshua Bengio and Aaron Courville
+- [Deep Learning Book](https://www.deeplearningbook.org/) by Ian Goodfellow, Yoshua Bengio and Aaron Courville
 
 - Deep Learning Specialization by Andrew Ng from Coursera
 
