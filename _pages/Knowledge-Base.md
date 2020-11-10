@@ -43,6 +43,10 @@ Here are a few materials:
 
 - Deep Learning Specialization by Andrew Ng from Coursera
 
+- DS-GA 1008 · SPRING 2020 · NYU CENTER FOR DATA SCIENCE - [Link](https://atcold.github.io/pytorch-Deep-Learning/)
+
+- YouTube Playlist - [Essence of Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
+
 - Deep Learning Tutorial on Kaggle
 
 - TensorFlow channel on YouTube
