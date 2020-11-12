@@ -47,11 +47,7 @@ Here are a few materials:
 
 - YouTube Playlist - [Essence of Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
 
-- YouTube Playlist - [MIT 18.06 Linear Algebra, Spring 2005](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8) / [Website](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/)
-
-- Deep Learning Tutorial on Kaggle
-
-- TensorFlow channel on YouTube
+- YouTube Playlist - [MIT 18.06 Linear Algebra, Spring 2005](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8) / [Course Website](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/)
 
 - [DeepLizard.com](https://deeplizard.com/) provides end to end high quality tutorials on Deep Learing with Keras, TensorFlow and PyTorch. Make sure to watch it.
 
