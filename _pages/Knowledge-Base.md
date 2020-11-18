@@ -43,6 +43,8 @@ Here are a few materials:
 
 - Deep Learning Specialization by Andrew Ng from Coursera
 
+- [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition](https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
+
 - DS-GA 1008 · SPRING 2020 · NYU CENTER FOR DATA SCIENCE - [Link](https://atcold.github.io/pytorch-Deep-Learning/)
 
 - YouTube Playlist - [Essence of Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
