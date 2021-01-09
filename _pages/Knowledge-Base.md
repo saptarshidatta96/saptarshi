@@ -12,6 +12,17 @@ published: true
 4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/knowledge-base/parameter-optimization-in-neural-networks)
 5. [Optimizer](https://sites.google.com/view/saptarshidatta/knowledge-base/optimizer)
 
+## Articles by other Authors
+
+- Why and how residual blocks work: https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec
+
+- Batch normalization and dropout explained: https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd
+
+- One Cycle Learning Rate Policy: https://sgugger.github.io/the-1cycle-policy.html
+
+- Weight decay: https://towardsdatascience.com/this-thing-called-weight-decay-a7cd4bcfccab
+
+- Gradient clipping: https://towardsdatascience.com/what-is-gradient-clipping-b8e815cdfb48
 
 ## Classical Machine Learning
 
