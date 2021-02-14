@@ -32,6 +32,8 @@ Here are a few materials:
 
 - Statistics Book - Business Statistics - A First Course by David M. Levine, David F. Stephan, Kathryn A. Szabat, P.K. Viswanatha
 
+- [Introduction to Probability and Statistics( For Scientists and Engineers)](http://www.r-5.org/files/books/computers/algo-list/statistics/probability/Sheldon_M_Ross-Introduction_to_Probability_and_Statistics-EN.pdf)
+
 - Head First Statistics  by Dawn Griffiths - Available at Safari Books Online
 
 - YouTube Channel - [StatQuest](https://www.youtube.com/user/joshstarmer) with Josh Starmer is a good place to start.
