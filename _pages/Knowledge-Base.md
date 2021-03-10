@@ -11,6 +11,7 @@ published: true
 3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/knowledge-base/hypothesis-testing)
 4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/knowledge-base/parameter-optimization-in-neural-networks)
 5. [Optimizer](https://sites.google.com/view/saptarshidatta/knowledge-base/optimizer)
+6. [Search Strategies](https://drive.google.com/file/d/1UPqzQzl7pldVTz-T-WG41f4_rAbSUH2F/view?usp=sharing)
 
 ## Articles by other Authors
 
