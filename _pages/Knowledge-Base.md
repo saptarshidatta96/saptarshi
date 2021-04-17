@@ -15,17 +15,17 @@ published: true
 
 ## Articles by other Authors
 
-- Why and how residual blocks work: https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec
+- [Why and how residual blocks work](https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec)
 
-- Batch normalization and dropout explained: https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd
+- [Batch normalization and dropout explained](https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd)
 
-- One Cycle Learning Rate Policy: https://sgugger.github.io/the-1cycle-policy.html
+- [One Cycle Learning Rate Policy](https://sgugger.github.io/the-1cycle-policy.html)
 
-- Weight decay: https://towardsdatascience.com/this-thing-called-weight-decay-a7cd4bcfccab
+- [Weight decay](https://towardsdatascience.com/this-thing-called-weight-decay-a7cd4bcfccab)
 
-- Gradient clipping: https://towardsdatascience.com/what-is-gradient-clipping-b8e815cdfb48
+- [Gradient clipping](https://towardsdatascience.com/what-is-gradient-clipping-b8e815cdfb48)
 
-- Logic and Proof: https://leanprover.github.io/logic_and_proof/index.html
+- [Logic and Proof](https://leanprover.github.io/logic_and_proof/index.html)
 
 ## Classical Machine Learning
 
