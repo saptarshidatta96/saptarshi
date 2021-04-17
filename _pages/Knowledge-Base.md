@@ -25,6 +25,8 @@ published: true
 
 - Gradient clipping: https://towardsdatascience.com/what-is-gradient-clipping-b8e815cdfb48
 
+- Logic and Proof: https://leanprover.github.io/logic_and_proof/index.html
+
 ## Classical Machine Learning
 
 Machine learning (ML) is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. It is the science of getting computers to act without being explicitly programmed.
