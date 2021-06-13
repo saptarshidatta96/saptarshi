@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Basic CNN and MLP implementation using PyTorch | Saptarshi Datta</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Basic CNN and MLP implementation using PyTorch" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Deep Learning, Computer Vision &amp; more." />
+<meta property="og:description" content="Deep Learning, Computer Vision &amp; more." />
+<link rel="canonical" href="https://saptarshidatta.in/2021/06/13/Preprocessong-CIFAR-100.html" />
+<meta property="og:url" content="https://saptarshidatta.in/2021/06/13/Preprocessong-CIFAR-100.html" />
+<meta property="og:site_name" content="Saptarshi Datta" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-13T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://saptarshidatta.in/2021/06/13/Preprocessong-CIFAR-100.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://saptarshidatta.in/2021/06/13/Preprocessong-CIFAR-100.html"},"headline":"Basic CNN and MLP implementation using PyTorch","dateModified":"2021-06-13T00:00:00-05:00","datePublished":"2021-06-13T00:00:00-05:00","description":"Deep Learning, Computer Vision &amp; more.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saptarshidatta.in/feed.xml" title="Saptarshi Datta" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css">
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Saptarshi Datta</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/kb/">Knowledge Base</a><a class="page-link" href="/projects/">Projects</a><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Basic CNN and MLP implementation using PyTorch</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-13T00:00:00-05:00" itemprop="datePublished">
+        Jun 13, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/saptarshidatta96/saptarshi/tree/master/_notebooks/2021-06-13-Preprocessong-CIFAR-100.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/saptarshidatta96/saptarshi/master?filepath=_notebooks%2F2021-06-13-Preprocessong-CIFAR-100.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/saptarshidatta96/saptarshi/blob/master/_notebooks/2021-06-13-Preprocessong-CIFAR-100.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-06-13-Preprocessong-CIFAR-100.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Importing-Libraries">Importing Libraries<a class="anchor-link" href="#Importing-Libraries"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">torchvision.datasets</span> <span class="kn">import</span> <span class="n">CIFAR100</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Preprocessing-Area">Preprocessing Area<a class="anchor-link" href="#Preprocessing-Area"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">class</span> <span class="nc">CIFAR100coarse</span><span class="p">(</span><span class="n">CIFAR100</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">download</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+
+    <span class="nb">super</span><span class="p">(</span><span class="n">CIFAR100coarse</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">target_transform</span><span class="p">,</span> <span class="n">download</span><span class="p">)</span>
+    <span class="n">coarse_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>
+                               <span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span>
+                               <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> 
+                               <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>
+                               <span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+                              <span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>
+                              <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> 
+                               <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span>
+                              <span class="mi">16</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span>
+                              <span class="mi">18</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">])</span>
+    
+    <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">coarse_labels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">]</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;beaver&#39;</span><span class="p">,</span> <span class="s1">&#39;dolphin&#39;</span><span class="p">,</span> <span class="s1">&#39;otter&#39;</span><span class="p">,</span> <span class="s1">&#39;seal&#39;</span><span class="p">,</span> <span class="s1">&#39;whale&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;aquarium_fish&#39;</span><span class="p">,</span> <span class="s1">&#39;flatfish&#39;</span><span class="p">,</span> <span class="s1">&#39;ray&#39;</span><span class="p">,</span> <span class="s1">&#39;shark&#39;</span><span class="p">,</span> <span class="s1">&#39;trout&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;orchid&#39;</span><span class="p">,</span> <span class="s1">&#39;poppy&#39;</span><span class="p">,</span> <span class="s1">&#39;rose&#39;</span><span class="p">,</span> <span class="s1">&#39;sunflower&#39;</span><span class="p">,</span> <span class="s1">&#39;tulip&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;bottle&#39;</span><span class="p">,</span> <span class="s1">&#39;bowl&#39;</span><span class="p">,</span> <span class="s1">&#39;can&#39;</span><span class="p">,</span> <span class="s1">&#39;cup&#39;</span><span class="p">,</span> <span class="s1">&#39;plate&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;mushroom&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;sweet_pepper&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;clock&#39;</span><span class="p">,</span> <span class="s1">&#39;keyboard&#39;</span><span class="p">,</span> <span class="s1">&#39;lamp&#39;</span><span class="p">,</span> <span class="s1">&#39;telephone&#39;</span><span class="p">,</span> <span class="s1">&#39;television&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;bed&#39;</span><span class="p">,</span> <span class="s1">&#39;chair&#39;</span><span class="p">,</span> <span class="s1">&#39;couch&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="s1">&#39;wardrobe&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;bee&#39;</span><span class="p">,</span> <span class="s1">&#39;beetle&#39;</span><span class="p">,</span> <span class="s1">&#39;butterfly&#39;</span><span class="p">,</span> <span class="s1">&#39;caterpillar&#39;</span><span class="p">,</span> <span class="s1">&#39;cockroach&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;bear&#39;</span><span class="p">,</span> <span class="s1">&#39;leopard&#39;</span><span class="p">,</span> <span class="s1">&#39;lion&#39;</span><span class="p">,</span> <span class="s1">&#39;tiger&#39;</span><span class="p">,</span> <span class="s1">&#39;wolf&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;bridge&#39;</span><span class="p">,</span> <span class="s1">&#39;castle&#39;</span><span class="p">,</span> <span class="s1">&#39;house&#39;</span><span class="p">,</span> <span class="s1">&#39;road&#39;</span><span class="p">,</span> <span class="s1">&#39;skyscraper&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span> <span class="s1">&#39;forest&#39;</span><span class="p">,</span> <span class="s1">&#39;mountain&#39;</span><span class="p">,</span> <span class="s1">&#39;plain&#39;</span><span class="p">,</span> <span class="s1">&#39;sea&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;camel&#39;</span><span class="p">,</span> <span class="s1">&#39;cattle&#39;</span><span class="p">,</span> <span class="s1">&#39;chimpanzee&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">,</span> <span class="s1">&#39;kangaroo&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;fox&#39;</span><span class="p">,</span> <span class="s1">&#39;porcupine&#39;</span><span class="p">,</span> <span class="s1">&#39;possum&#39;</span><span class="p">,</span> <span class="s1">&#39;raccoon&#39;</span><span class="p">,</span> <span class="s1">&#39;skunk&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;crab&#39;</span><span class="p">,</span> <span class="s1">&#39;lobster&#39;</span><span class="p">,</span> <span class="s1">&#39;snail&#39;</span><span class="p">,</span> <span class="s1">&#39;spider&#39;</span><span class="p">,</span> <span class="s1">&#39;worm&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;baby&#39;</span><span class="p">,</span> <span class="s1">&#39;boy&#39;</span><span class="p">,</span> <span class="s1">&#39;girl&#39;</span><span class="p">,</span> <span class="s1">&#39;man&#39;</span><span class="p">,</span> <span class="s1">&#39;woman&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;crocodile&#39;</span><span class="p">,</span> <span class="s1">&#39;dinosaur&#39;</span><span class="p">,</span> <span class="s1">&#39;lizard&#39;</span><span class="p">,</span> <span class="s1">&#39;snake&#39;</span><span class="p">,</span> <span class="s1">&#39;turtle&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;hamster&#39;</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">,</span> <span class="s1">&#39;rabbit&#39;</span><span class="p">,</span> <span class="s1">&#39;shrew&#39;</span><span class="p">,</span> <span class="s1">&#39;squirrel&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;maple_tree&#39;</span><span class="p">,</span> <span class="s1">&#39;oak_tree&#39;</span><span class="p">,</span> <span class="s1">&#39;palm_tree&#39;</span><span class="p">,</span> <span class="s1">&#39;pine_tree&#39;</span><span class="p">,</span> <span class="s1">&#39;willow_tree&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;bicycle&#39;</span><span class="p">,</span> <span class="s1">&#39;bus&#39;</span><span class="p">,</span> <span class="s1">&#39;motorcycle&#39;</span><span class="p">,</span> <span class="s1">&#39;pickup_truck&#39;</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s1">&#39;lawn_mower&#39;</span><span class="p">,</span> <span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="s1">&#39;streetcar&#39;</span><span class="p">,</span> <span class="s1">&#39;tank&#39;</span><span class="p">,</span> <span class="s1">&#39;tractor&#39;</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">mean_std</span><span class="p">():</span>
+  <span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()])</span>
+  <span class="n">data_set</span> <span class="o">=</span> <span class="n">CIFAR100coarse</span><span class="p">(</span><span class="n">root</span> <span class="o">=</span> <span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span><span class="p">,</span> <span class="n">target_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">download</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+  <span class="n">numpy_images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+  <span class="n">per_image_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numpy_images</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+  <span class="n">per_image_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">numpy_images</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+  <span class="n">per_channel_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">per_image_mean</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">per_channel_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">per_image_std</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">per_channel_mean</span><span class="p">,</span> <span class="n">per_channel_std</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">cifar_preprocessor</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">test_shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+  <span class="n">per_channel_mean</span><span class="p">,</span> <span class="n">per_channel_std</span> <span class="o">=</span> <span class="n">mean_std</span><span class="p">()</span>
+  <span class="n">transform</span> <span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span> <span class="o">=</span> <span class="n">per_channel_mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">per_channel_std</span><span class="p">)])</span>
+
+  <span class="n">train_set</span> <span class="o">=</span> <span class="n">CIFAR100coarse</span><span class="p">(</span><span class="n">root</span> <span class="o">=</span> <span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span><span class="p">,</span> <span class="n">target_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">download</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+  <span class="n">test_set</span> <span class="o">=</span> <span class="n">CIFAR100coarse</span><span class="p">(</span><span class="n">root</span> <span class="o">=</span> <span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">train</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span><span class="p">,</span> <span class="n">target_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">download</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_set</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="n">test_shuffle</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="MLP-implementation">MLP implementation<a class="anchor-link" href="#MLP-implementation"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">class</span> <span class="nc">MLP_network</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Check this link for nn.Linear: https://pytorch.org/docs/stable/generated/torch.nn.Linear.html</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">MLP_network</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3072</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc4</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc5</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc6</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="c1">#Layer1</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1">#Layer2</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1">#Layer3</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1">#Layer4</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc4</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1">#Layer5</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc5</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1">#Layer6</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc6</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1">#Layer7</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="CNN-Implementation">CNN Implementation<a class="anchor-link" href="#CNN-Implementation"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">class</span> <span class="nc">CNN_network</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">CNN_network</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">16</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">84</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">84</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="c1">#Layer 1</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="c1">#Layer 2</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="c1">#output shape : (6,14,14)</span>
+    <span class="c1">#Layer 3</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="c1">#output shape : (16,5,5)</span>
+    <span class="c1">#Layer 4</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="c1">#output shape : (1,120)</span>
+    <span class="c1">#Layer 5</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="c1">#output shape : (1, 84)</span>
+    <span class="c1">#Layer 6/ Output Layer</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="c1">#output shape : (1, 20)</span>
+
+    <span class="k">return</span> <span class="n">t</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training-Module">Training Module<a class="anchor-link" href="#Training-Module"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">train_nn</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; Training Start &gt;&gt;&gt;&#39;</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+      <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span>
+      <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="o">*</span><span class="mi">32</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> 
+      <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+      <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+      <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+      <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+      <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+      <span class="n">total_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">+</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+      <span class="n">total_correct</span> <span class="o">=</span> <span class="n">total_correct</span> <span class="o">+</span> <span class="n">predictions</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;epoch:&#39;</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="s2">&quot;total_correct:&quot;</span><span class="p">,</span> <span class="n">total_correct</span><span class="p">,</span> <span class="s2">&quot;loss:&quot;</span><span class="p">,</span> <span class="n">total_loss</span><span class="p">)</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; Training Complete &gt;&gt;&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prediction-Module">Prediction Module<a class="anchor-link" href="#Prediction-Module"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">get_all_preds</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+  <span class="n">all_preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([])</span>
+  <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+    <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+      <span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="o">*</span><span class="mi">32</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> 
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">all_preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">all_preds</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span> <span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">all_preds</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Testing-Module">Testing Module<a class="anchor-link" href="#Testing-Module"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">calc_accuracy</span><span class="p">(</span><span class="n">test_preds</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+  <span class="n">actual_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">test_set</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+  <span class="n">preds_correct</span> <span class="o">=</span> <span class="n">test_preds</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">actual_labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Multi Layer Perceptrons&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Convolutional Neural Networks&#39;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total correct:&#39;</span><span class="p">,</span> <span class="n">preds_correct</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;accuracy:&#39;</span><span class="p">,</span> <span class="n">preds_correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_set</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation-Module">Implementation Module<a class="anchor-link" href="#Implementation-Module"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">cifar_preprocessor</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enter 1 for MLP, 2 for CNN&#39;</span><span class="p">)</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Multiple Layer of Perceptrons&#39;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">MLP_network</span><span class="p">()</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">train_nn</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">all_preds</span> <span class="o">=</span> <span class="n">get_all_preds</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">calc_accuracy</span><span class="p">(</span><span class="n">all_preds</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;./cifar100_mlp.pth&#39;</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">PATH</span><span class="p">)</span>
+
+  <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Convolutional Neural Network&#39;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">CNN_network</span><span class="p">()</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">train_nn</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">all_preds</span> <span class="o">=</span> <span class="n">get_all_preds</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">calc_accuracy</span><span class="p">(</span><span class="n">all_preds</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;./cifar100_cnn.pth&#39;</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">PATH</span><span class="p">)</span>
+
+  <span class="k">else</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Wrong Choice...Try Again!!!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Enter 1 for MLP, 2 for CNN
+1
+Multiple Layer of Perceptrons
+&gt;&gt;&gt; Training Start &gt;&gt;&gt;
+epoch: 0 total_correct: 2817 loss: 2342.371166229248
+epoch: 1 total_correct: 3320 loss: 2340.0113854408264
+epoch: 2 total_correct: 4354 loss: 2332.8723883628845
+epoch: 3 total_correct: 4828 loss: 2258.425218820572
+epoch: 4 total_correct: 6902 loss: 2124.3050644397736
+epoch: 5 total_correct: 8667 loss: 2058.6139965057373
+epoch: 6 total_correct: 10074 loss: 1992.6582174301147
+epoch: 7 total_correct: 11448 loss: 1925.155211687088
+epoch: 8 total_correct: 12894 loss: 1862.4140621423721
+epoch: 9 total_correct: 13918 loss: 1809.2699065208435
+epoch: 10 total_correct: 14919 loss: 1759.2945556640625
+epoch: 11 total_correct: 16024 loss: 1704.545359969139
+epoch: 12 total_correct: 16870 loss: 1657.445464372635
+epoch: 13 total_correct: 17835 loss: 1607.2123988866806
+epoch: 14 total_correct: 18817 loss: 1554.9647988080978
+epoch: 15 total_correct: 19625 loss: 1504.4832880496979
+epoch: 16 total_correct: 20438 loss: 1457.3500571250916
+epoch: 17 total_correct: 21534 loss: 1401.9261798858643
+epoch: 18 total_correct: 22502 loss: 1346.6949373483658
+epoch: 19 total_correct: 23500 loss: 1293.0633860826492
+epoch: 20 total_correct: 24571 loss: 1238.7428677082062
+epoch: 21 total_correct: 25787 loss: 1173.1022816300392
+epoch: 22 total_correct: 26799 loss: 1117.0504439473152
+epoch: 23 total_correct: 28132 loss: 1050.3701268434525
+epoch: 24 total_correct: 29300 loss: 991.4318377971649
+epoch: 25 total_correct: 30446 loss: 928.4249439835548
+epoch: 26 total_correct: 31757 loss: 865.1841924786568
+epoch: 27 total_correct: 33180 loss: 796.4853633642197
+epoch: 28 total_correct: 34014 loss: 754.7700568437576
+epoch: 29 total_correct: 35392 loss: 689.5142071247101
+&gt;&gt;&gt; Training Complete &gt;&gt;&gt;
+Multi Layer Perceptrons
+total correct: 36676
+accuracy: 0.73352
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/2021/06/13/Preprocessong-CIFAR-100.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Deep Learning, Computer Vision &amp; more.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/saptarshidatta96" title="saptarshidatta96"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/ds_saptarshi" title="ds_saptarshi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
