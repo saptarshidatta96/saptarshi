@@ -27,6 +27,9 @@ published: true
 
 - [Logic and Proof](https://leanprover.github.io/logic_and_proof/index.html)
 
+## IIT Jodhpur MTech(Artificial Intelligence)
+Semester 1 : https://github.com/saptarshidatta96/MTech_Sem1
+
 ## Classical Machine Learning
 
 Machine learning (ML) is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. It is the science of getting computers to act without being explicitly programmed.
