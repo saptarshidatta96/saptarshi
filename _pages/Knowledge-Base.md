@@ -11,18 +11,24 @@ published: true
 3. [Hypothesis Testing](https://sites.google.com/view/saptarshidatta/knowledge-base/hypothesis-testing)
 4. [Parameter Optimization in Neural Networks](https://sites.google.com/view/saptarshidatta/knowledge-base/parameter-optimization-in-neural-networks)
 5. [Optimizer](https://sites.google.com/view/saptarshidatta/knowledge-base/optimizer)
+6. [Search Strategies](https://drive.google.com/file/d/1UPqzQzl7pldVTz-T-WG41f4_rAbSUH2F/view?usp=sharing)
 
 ## Articles by other Authors
 
-- Why and how residual blocks work: https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec
+- [Why and how residual blocks work](https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec)
 
-- Batch normalization and dropout explained: https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd
+- [Batch normalization and dropout explained](https://towardsdatascience.com/batch-normalization-and-dropout-in-neural-networks-explained-with-pytorch-47d7a8459bcd)
 
-- One Cycle Learning Rate Policy: https://sgugger.github.io/the-1cycle-policy.html
+- [One Cycle Learning Rate Policy](https://sgugger.github.io/the-1cycle-policy.html)
 
-- Weight decay: https://towardsdatascience.com/this-thing-called-weight-decay-a7cd4bcfccab
+- [Weight decay](https://towardsdatascience.com/this-thing-called-weight-decay-a7cd4bcfccab)
 
-- Gradient clipping: https://towardsdatascience.com/what-is-gradient-clipping-b8e815cdfb48
+- [Gradient clipping](https://towardsdatascience.com/what-is-gradient-clipping-b8e815cdfb48)
+
+- [Logic and Proof](https://leanprover.github.io/logic_and_proof/index.html)
+
+## IIT Jodhpur MTech(Artificial Intelligence)
+Semester 1 : https://github.com/saptarshidatta96/MTech_Sem1
 
 ## Classical Machine Learning
 
