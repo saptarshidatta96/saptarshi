@@ -16,11 +16,15 @@ technologies.
 # SKILLS
 
 **Machine Learning**: Classification, Regression, Clustering, Decision Trees, Random Forests
+
 **Deep Learning**: Forward Propagation, Backward propagation, Hyper parameter Tuning,
 Regularization & Optimization, CNN & RNN models. Experience with Keras API (Tensorflow
 Backend) snd PyTorch.
+
 **Programming Languages**: Python | **Scripting Language**: Unix | **Database Language**: SQL
+
 **Data Extraction Tool**: Informatica PowerCenter, IBM Infosphere DataStage
+
 **Data Reporting Tool**: Tableau
 
 # EXPERIENCE
