@@ -60,4 +60,4 @@ Post Graduate Program - Business Analytics & Business Intelligence, certificate 
 
 Maulana Abul Kalam Azad University of Technology, West Bengal
 BTech - Electrical Engineering, DGPA: 8.46/10
-(August 2014 – June 2018
+(August 2014 – June 2018)
