@@ -2,6 +2,7 @@
 layout: page
 permalink: /cv/
 published: true
+title: CV
 ---
 
 ## Saptarshi Datta
