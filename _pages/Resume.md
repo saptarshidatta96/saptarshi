@@ -52,13 +52,21 @@ Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 ## EDUCATION
 
 Indian Institute of Technology, Jodhpur
+
 MTech - Artificial Intelligence, part-time degree
+
 (February 2021 – till date)
 
+
 Great Lakes Institute of Management
-Post Graduate Program - Business Analytics & Business Intelligence, certificate course
+
+Post Graduate Program - Business Analytics & Business Intelligence
+
 (May 2019 – May 2020)
 
+
 Maulana Abul Kalam Azad University of Technology, West Bengal
+
 BTech - Electrical Engineering, DGPA: 8.46/10
+
 (August 2014 – June 2018)
