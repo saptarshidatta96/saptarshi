@@ -6,7 +6,7 @@ published: true
 
 ## Saptarshi Datta
 
-mail to : saptarshidatta96@gmail.com
+saptarshidatta96@gmail.com
 
 [LinkedIn](https://www.linkedin.com/in/saptarshi-datta/) | [GitHub](https://github.com/saptarshidatta96) | [Website](https://saptarshidatta.in/)
 
