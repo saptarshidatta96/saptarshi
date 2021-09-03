@@ -31,21 +31,26 @@ November 2018 - PRESENT
 
 ROLE: Data Engineer - Analytics and Reporting platform (February, 2019 - July, 2021)
 
-Domain : Banking, Financial Services and Insurance
-
-● Created end to end Mappings in Informatica PowerCenter which included data integration across
-disparate systems for further analytics workflow.
-● Created monthly reports adhering to SLA requirements.
-● Maintained Analytics workflows
 ROLE: AI/ML Developer - TCS Rapid Labs (July, 2021 -Present)
-● Working on Optical Character Recognition with Azure Form Recognizer and Document AI
-● PoC Testing and Upskilling self as well as team members.
-PROJECTS
-Below are some projects executed by me in personal capacity in line with my core competencies.
-● Image Classification using pre-trained VGG 16 model with transfer learning
-This project aimed at understanding the concepts of Transfer Learning using pre-trained
-architectures available. Also, it also aimed at creating a web application using Streamlit
-and further containerization using Docker. Plan is to further deploy this application on a
-cloud PaaS such as Heroku. Here is the github link.
-Tools
-Transfer Learning, Docker, Streamlit application developmen
+
+# CERTIFICATIONS 
+
+- DP 900 - Microsoft Azure Data Fundamentals
+
+- Python for Data Science and Machine Learning Bootcamp, Udemy
+
+- Deep Learning Specialization, Coursera
+
+# EDUCATION
+
+Indian Institute of Technology, Jodhpur
+MTech - Artificial Intelligence, part-time degree
+(February 2021 – till date)
+
+Great Lakes Institute of Management
+Post Graduate Program - Business Analytics & Business Intelligence, certificate course
+(May 2019 – May 2020)
+
+Maulana Abul Kalam Azad University of Technology, West Bengal
+BTech - Electrical Engineering, DGPA: 8.46/10
+(August 2014 – June 2018
