@@ -8,8 +8,6 @@ published: true
 
 mail to : saptarshidatta96@gmail.com
 
-Mob : +91-8910782618
-
 [LinkedIn](https://www.linkedin.com/in/saptarshi-datta/) | [GitHub](https://github.com/saptarshidatta96) | [Website](https://saptarshidatta.in/)
 
 ## Career Objective
