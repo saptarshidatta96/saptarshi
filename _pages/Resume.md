@@ -5,9 +5,7 @@ permalink: /cv/
 published: true
 ---
 
-## Saptarshi Datta
-
-# Systems Engineer
+# Saptarshi Datta, System Engineer
 
 [saptarshidatta96@gmail.com](saptarshidatta96@gmail.com)
 
