@@ -36,13 +36,11 @@ Backend) snd PyTorch.
 
 # EXPERIENCE
 
-Tata Consultancy Services, Kolkata - Systems Engineer
+Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 
-November 2018 - PRESENT
+- Data Engineer - Analytics and Reporting platform (February, 2019 - July, 2021)
 
-ROLE: Data Engineer - Analytics and Reporting platform (February, 2019 - July, 2021)
-
-ROLE: AI/ML Developer - TCS Rapid Labs (July, 2021 -Present)
+- AI/ML Developer - TCS Rapid Labs (July, 2021 -Present)
 
 # CERTIFICATIONS 
 
