@@ -4,7 +4,7 @@ permalink: /cv/
 published: true
 ---
 
-# Saptarshi Datta, System Engineer
+## Saptarshi Datta, System Engineer
 
 [saptarshidatta96@gmail.com](saptarshidatta96@gmail.com)
 
@@ -12,12 +12,12 @@ Mob : +91-8910782618
 
 [LinkedIn](https://www.linkedin.com/in/saptarshi-datta/) | [GitHub](https://github.com/saptarshidatta96) | [Website](https://saptarshidatta.in/)
 
-# Career Objective
+## Career Objective
 
 To work in a challenging and motivating career that provides an opportunity to work with the latest
 technologies.
 
-# SKILLS
+## SKILLS
 
 **Machine Learning**: Classification, Regression, Clustering, Decision Trees, Random Forests
 
@@ -34,7 +34,7 @@ Backend) snd PyTorch.
 
 **Data Reporting Tool**: Tableau
 
-# EXPERIENCE
+## EXPERIENCE
 
 Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 
@@ -42,7 +42,7 @@ Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 
 - AI/ML Developer - TCS Rapid Labs (July, 2021 -Present)
 
-# CERTIFICATIONS 
+## CERTIFICATIONS 
 
 - DP 900 - Microsoft Azure Data Fundamentals
 
@@ -50,7 +50,7 @@ Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 
 - Deep Learning Specialization, Coursera
 
-# EDUCATION
+## EDUCATION
 
 Indian Institute of Technology, Jodhpur
 MTech - Artificial Intelligence, part-time degree
