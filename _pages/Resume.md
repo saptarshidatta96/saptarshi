@@ -1,3 +1,10 @@
+---
+layout: page
+title: Resume
+permalink: /cv/
+published: true
+---
+
 ## Saptarshi Datta
 
 # Systems Engineer
