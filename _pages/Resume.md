@@ -7,7 +7,7 @@ title: CV
 
 ## Saptarshi Datta
 
-saptarshidatta96@gmail.com
+datta.3@iitj.ac.in
 
 [LinkedIn](https://www.linkedin.com/in/saptarshi-datta/) | [GitHub](https://github.com/saptarshidatta96) | [Website](https://saptarshidatta.in/)
 
