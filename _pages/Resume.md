@@ -6,7 +6,7 @@ published: true
 
 ## Saptarshi Datta
 
-[saptarshidatta96@gmail.com](saptarshidatta96@gmail.com)
+mail to : saptarshidatta96@gmail.com
 
 Mob : +91-8910782618
 
