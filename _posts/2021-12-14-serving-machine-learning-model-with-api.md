@@ -51,7 +51,7 @@ if __name__ == '__main__':
 ```
 The above script is responsible for exposing the functionality of out trained model as an API. We have deserialized the two .pkl files.Now, if noticed carefully the function that we wrote would only work under conditions where the incoming request contains all possible values for the categorical variables which may or may not be the case in real-time. If the incoming request does not include all possible values of the categorical variables then as per the current method definition of `predict()`, `get_dummies()` would generate a dataframe that has fewer columns than the classifier excepts, which would result in a runtime error. Hence we have serialized the columns of the dataset in .pkl format.
 
-Now that we have written out script, we can test it using Postman to check whether it's working correctly or not. Below is teh typical response we will send to our API.
+Now that we have written out script, we can test it using Postman to check whether it's working correctly or not. Below is a typical input we will send to our API.
 ```
 [
     {
@@ -88,5 +88,21 @@ Now that we have written out script, we can test it using Postman to check wheth
     }
 ]
 ```
-and the outpur will be :
+and the response received from the API will be :
 ![]({{site.baseurl}}/images/Picture1.png)
+
+Now, that we have seen that the API is functioning properly, we will now contanerize out application using Docker. For this, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop) installed in your respective systems. Once Docker has been installed, create two files named `Dockerfile` and `requirements.txt`. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.
+
+This concluded the end of our blog. To know more about Docker, please go through the [Docker Documentation](https://docs.docker.com/get-started/).
+
+The GitHub Repo is available [here](https://github.com/saptarshidatta96/Breast-Cancer).
+The Docker Image is available [here](https://hub.docker.com/repository/docker/saptarshidatta96/breast_cancer).
+
+References:
+1. https://docs.docker.com/get-started/
+
+2. https://www.datacamp.com/community/tutorials/machine-learning-models-api-python
+
+3. https://learning.postman.com/docs/getting-started/introduction/
+
+4. https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/
