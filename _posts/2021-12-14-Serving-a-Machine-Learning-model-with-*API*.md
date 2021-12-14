@@ -8,6 +8,9 @@ Now, once we have acknowledged this gap in our learning journey, there is one mo
 
 In this blog, we will be learning to wrap our ML Models into an API. We will be building a simple classifier whose job is to classify a breast tumour as malignant or benign based on the features in the dataset. After that we will be saving the trained model(Serialization & Deserialization), exposing the functionality of the model as an API and testing the API using Postman. Additionally the entire setup is avialble as a Docker Image [here](https://hub.docker.com/repository/docker/saptarshidatta96/breast_cancer) and code is availble [here](https://github.com/saptarshidatta96/Breast-Cancer).
 
+The model training script is uploaded at the GitHub Repository above and will not be discussed here. However, we will discuss about serializing the model as pickle file, deserializing it and exposing the functionality of the model as a Flask API. We will be using sk-learn's `joblib` library for this.
+
+
 
 
 
