@@ -94,6 +94,12 @@ window.onload = wrap_img;
 
 <p>The model training script is uploaded at the GitHub Repository above and will not be discussed here. However, we will discuss about serializing the model as pickle file, deserializing it and exposing the functionality of the model as a Flask API. We will be using sk-learn’s <code class="language-plaintext highlighter-rouge">joblib</code> library for this.</p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import joblib
+joblib.dump(model, 'breast_cancer_knn_model.pkl')
+model_columns = list(cancer_data['feature_names'])
+joblib.dump(model_columns, 'model_columns.pkl')
+</code></pre></div></div>
+
 
   </div><a class="u-url" href="/2021/12/14/Serving-a-Machine-Learning-model-with-API.html" hidden></a>
 </article>
