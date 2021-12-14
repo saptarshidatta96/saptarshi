@@ -49,6 +49,51 @@ if __name__ == '__main__':
     print ('Model columns loaded')
     app.run(host='0.0.0.0', port=12345, debug=True)
 ```
+The above script is responsible for exposing the functionality of out trained model as an API. We have deserialized the two .pkl files.Now, if noticed carefully the function that we wrote would only work under conditions where the incoming request contains all possible values for the categorical variables which may or may not be the case in real-time. If the incoming request does not include all possible values of the categorical variables then as per the current method definition of `predict()`, `get_dummies()` would generate a dataframe that has fewer columns than the classifier excepts, which would result in a runtime error. Hence we have serialized the columns of the dataset in .pkl format.
+
+Now that we have written out script, we can test it using Postman to check whether it's working correctly or not. Below is teh typical response we will send to our API.
+`
+[
+    {
+        "mean radius": 17.99,
+        "mean texture": 10.38,
+        "mean perimeter": 122.8,
+        "mean area": 1001.0,
+        "mean smoothness": 0.1184,
+        "mean compactness": 0.2776,
+        "mean concavity": 0.3001,
+        "mean concave points": 0.1471,
+        "mean symmetry": 0.2419,
+        "mean fractal dimension": 0.07871,
+        "radius error": 1.095,
+        "texture error": 0.9053,
+        "perimeter error": 8.589,
+        "area error": 153.4,
+        "smoothness error": 0.006399,
+        "compactness error": 0.04904,
+        "concavity error": 0.05373,
+        "concave points error": 0.01587,
+        "symmetry error": 0.03003,
+        "fractal dimension error": 0.006193,
+        "worst radius": 25.38,
+        "worst texture": 17.33,
+        "worst perimeter": 184.6,
+        "worst area": 2019.0,
+        "worst smoothness": 0.1622,
+        "worst compactness": 0.6656,
+        "worst concavity": 0.7119,
+        "worst concave points": 0.2654,
+        "worst symmetry": 0.4601,
+        "worst fractal dimension": 0.1189
+    }
+]
+`
+and teh outpur will be :
+![Picture1.png]({{site.baseurl}}/_posts/Picture1.png)
+
+
+
+
 
 
 
