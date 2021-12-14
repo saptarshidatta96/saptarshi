@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -99,7 +99,38 @@ window.onload = wrap_img;
 <span class="n">model_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cancer_data</span><span class="p">[</span><span class="s">'feature_names'</span><span class="p">])</span>
 <span class="n">joblib</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model_columns</span><span class="p">,</span> <span class="s">'model_columns.pkl'</span><span class="p">)</span>
 </code></pre></div></div>
-<p>Here, the objecr model refers to our trained model and</p>
+<p>Here, the object <code class="language-plaintext highlighter-rouge">model</code> refers to our trained model and the <code class="language-plaintext highlighter-rouge">model_columns</code> contains the list of columns in the dataset. We will serialize both of these as .pkl file. The reason for serializing <code class="language-plaintext highlighter-rouge">model_columns</code> is explained below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from flask import Flask, request, jsonify
+import joblib
+import pandas as pd
+
+app = Flask(__name__)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    if knn_model:
+        try:
+            json_ = request.json
+            print(json_)
+            query = pd.get_dummies(pd.DataFrame(json_))
+            query = query.reindex(columns=model_columns, fill_value=0)
+            prediction = list(knn_model.predict(query))
+            return jsonify({'prediction': str(prediction)})
+        except Exception as e:
+            return jsonify({'error': e})
+    else:
+        print ('Train the model first')
+        return ('No model here to use')
+
+if __name__ == '__main__':
+
+    knn_model = joblib.load("breast_cancer_knn_model.pkl")
+    print ('Model loaded')
+    model_columns = joblib.load("model_columns.pkl")
+    print ('Model columns loaded')
+    app.run(host='0.0.0.0', port=12345, debug=True)
+</code></pre></div></div>
 
 
   </div><a class="u-url" href="/2021/12/14/Serving-a-Machine-Learning-model-with-API.html" hidden></a>
