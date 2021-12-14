@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      4 min read
     
 </span></p>
 
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 </code></pre></div></div>
 <p>The above script is responsible for exposing the functionality of out trained model as an API. We have deserialized the two .pkl files.Now, if noticed carefully the function that we wrote would only work under conditions where the incoming request contains all possible values for the categorical variables which may or may not be the case in real-time. If the incoming request does not include all possible values of the categorical variables then as per the current method definition of <code class="language-plaintext highlighter-rouge">predict()</code>, <code class="language-plaintext highlighter-rouge">get_dummies()</code> would generate a dataframe that has fewer columns than the classifier excepts, which would result in a runtime error. Hence we have serialized the columns of the dataset in .pkl format.</p>
 
-<p>Now that we have written out script, we can test it using Postman to check whether it’s working correctly or not. Below is teh typical response we will send to our API.</p>
+<p>Now that we have written out script, we can test it using Postman to check whether it’s working correctly or not. Below is a typical input we will send to our API.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[
     {
         "mean radius": 17.99,
@@ -169,8 +169,31 @@ if __name__ == '__main__':
     }
 ]
 </code></pre></div></div>
-<p>and the outpur will be :
+<p>and the response received from the API will be :
 <img src="/images/Picture1.png" alt="" /></p>
+
+<p>Now, that we have seen that the API is functioning properly, we will now contanerize out application using Docker. For this, you must have <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a> installed in your respective systems. Once Docker has been installed, create two files named <code class="language-plaintext highlighter-rouge">Dockerfile</code> and <code class="language-plaintext highlighter-rouge">requirements.txt</code>. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.</p>
+
+<p>This concluded the end of our blog. To know more about Docker, please go through the <a href="https://docs.docker.com/get-started/">Docker Documentation</a>.</p>
+
+<p>The GitHub Repo is available <a href="https://github.com/saptarshidatta96/Breast-Cancer">here</a>.
+The Docker Image is available <a href="https://hub.docker.com/repository/docker/saptarshidatta96/breast_cancer">here</a>.</p>
+
+<p>References:</p>
+<ol>
+  <li>
+    <p>https://docs.docker.com/get-started/</p>
+  </li>
+  <li>
+    <p>https://www.datacamp.com/community/tutorials/machine-learning-models-api-python</p>
+  </li>
+  <li>
+    <p>https://learning.postman.com/docs/getting-started/introduction/</p>
+  </li>
+  <li>
+    <p>https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/</p>
+  </li>
+</ol>
 
   </div><a class="u-url" href="/2021/12/14/serving-machine-learning-model-with-api.html" hidden></a>
 </article>
