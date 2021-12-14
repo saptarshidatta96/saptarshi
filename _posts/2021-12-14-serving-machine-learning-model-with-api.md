@@ -52,7 +52,7 @@ if __name__ == '__main__':
 The above script is responsible for exposing the functionality of out trained model as an API. We have deserialized the two .pkl files.Now, if noticed carefully the function that we wrote would only work under conditions where the incoming request contains all possible values for the categorical variables which may or may not be the case in real-time. If the incoming request does not include all possible values of the categorical variables then as per the current method definition of `predict()`, `get_dummies()` would generate a dataframe that has fewer columns than the classifier excepts, which would result in a runtime error. Hence we have serialized the columns of the dataset in .pkl format.
 
 Now that we have written out script, we can test it using Postman to check whether it's working correctly or not. Below is teh typical response we will send to our API.
-`
+```
 [
     {
         "mean radius": 17.99,
@@ -87,8 +87,8 @@ Now that we have written out script, we can test it using Postman to check wheth
         "worst fractal dimension": 0.1189
     }
 ]
-`
-and teh outpur will be :
+```
+and the outpur will be :
 ![Picture1.png]({{site.baseurl}}/_posts/Picture1.png)
 
 
