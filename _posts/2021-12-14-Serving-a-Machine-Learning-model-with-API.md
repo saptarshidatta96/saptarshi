@@ -10,12 +10,13 @@ In this blog, we will be learning to wrap our ML Models into an API. We will be 
 
 The model training script is uploaded at the GitHub Repository above and will not be discussed here. However, we will discuss about serializing the model as pickle file, deserializing it and exposing the functionality of the model as a Flask API. We will be using sk-learn's `joblib` library for this.
 
-```
+```python
 import joblib
 joblib.dump(model, 'breast_cancer_knn_model.pkl')
 model_columns = list(cancer_data['feature_names'])
 joblib.dump(model_columns, 'model_columns.pkl')
 ```
+Here, the objecr model refers to our trained model and 
 
 
 
