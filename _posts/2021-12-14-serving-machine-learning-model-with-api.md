@@ -89,15 +89,4 @@ Now that we have written out script, we can test it using Postman to check wheth
 ]
 ```
 and the outpur will be :
-![Picture1.png]({{site.baseurl}}/_posts/Picture1.png)
-
-
-
-
-
-
-
-
-
-
-
+![]({{site.baseurl}}/images/Picture1.png)
