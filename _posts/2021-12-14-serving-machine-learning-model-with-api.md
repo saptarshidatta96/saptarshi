@@ -99,10 +99,10 @@ The GitHub Repo is available [here](https://github.com/saptarshidatta96/Breast-C
 The Docker Image is available [here](https://hub.docker.com/repository/docker/saptarshidatta96/breast_cancer).
 
 References:
-1. https://docs.docker.com/get-started/
+1. [https://docs.docker.com/get-started/](https://docs.docker.com/get-started/)
 
-2. https://www.datacamp.com/community/tutorials/machine-learning-models-api-python
+2. [https://www.datacamp.com/community/tutorials/machine-learning-models-api-python](https://www.datacamp.com/community/tutorials/machine-learning-models-api-python)
 
-3. https://learning.postman.com/docs/getting-started/introduction/
+3. [https://learning.postman.com/docs/getting-started/introduction/](https://learning.postman.com/docs/getting-started/introduction/)
 
-4. https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/
+4. [https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/](https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/)
