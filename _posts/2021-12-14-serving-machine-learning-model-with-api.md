@@ -128,3 +128,5 @@ References:
 3. [https://learning.postman.com/docs/getting-started/introduction/](https://learning.postman.com/docs/getting-started/introduction/)
 
 4. [https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/](https://www.geeksforgeeks.org/exposing-ml-dl-models-as-rest-apis/)
+
+5. [https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
