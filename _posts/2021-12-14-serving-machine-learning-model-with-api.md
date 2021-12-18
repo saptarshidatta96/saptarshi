@@ -2,7 +2,7 @@
 published: true
 layout: post
 ---
-Till now, all the blogs I've posted were basically leveraging CNN pre-tarined models to develop a model that was useful for our given use case. But from my experience at TCS Rapid Labs, I have learnt that training models is not enough. We not to serve them to make them usable across our production systems.
+Till now, all the blogs I've posted were basically leveraging CNN pre-trained models to develop a model that was useful for our given use case. But from my experience at TCS Rapid Labs, I have learnt that training models is not enough. We not to serve them to make them usable across our production systems.
 
 Now, once we have acknowledged this gap in our learning journey, there is one more thing we need to take account of. Most of the production grade systems and legacy application who are willing to leavrage the power of AI are essentially not written in Python. However, most of us are using Python to train our models. This is where we can use power of APIs.
 
@@ -23,19 +23,35 @@ from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 
+
 app = Flask(__name__)
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET'])
+
+
 def predict():
     if knn_model:
         try:
-            json_ = request.json
-            print(json_)
-            query = pd.get_dummies(pd.DataFrame(json_))
-            query = query.reindex(columns=model_columns, fill_value=0)
-            prediction = list(knn_model.predict(query))
-            return jsonify({'prediction': str(prediction)})
+            if request.get_json() is not None:
+                json_ = request.json
+                query = pd.get_dummies(pd.DataFrame(json_))
+                query = query.reindex(columns=model_columns, fill_value=0)
+                prediction = list(knn_model.predict(query))
+
+                return jsonify({'prediction': str(prediction),
+                                'Input': request.json})
+            else:
+                
+                json_ = [request.args]
+                query = pd.get_dummies(pd.DataFrame(json_))
+                query = query.reindex(columns=model_columns, fill_value=0)
+                prediction = list(knn_model.predict(query))
+
+                return jsonify({'prediction': str(prediction),
+                                'Input': [request.args]})
+
         except Exception as e:
+
             return jsonify({'error': e})
     else:
         print ('Train the model first')
