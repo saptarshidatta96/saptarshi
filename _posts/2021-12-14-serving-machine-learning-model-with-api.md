@@ -110,7 +110,8 @@ and the response received from the API will be :
 Next, we will tst our API by calling it from our browser. As discussed, we need not send values of all the variables for our API to work correctly. The service will interally handle it and give the output response.
 Hence, we will call the API by 
 
-`http://localhost:12345/predict?mean_compactness=0.277&worst%20perimeter=184.6` .
+`http://localhost:12345/predict?mean_compactness=0.277&worst%20perimeter=184.6`
+
 The response should be like:
 ![]({{site.baseurl}}/images/api_call.PNG)
 
