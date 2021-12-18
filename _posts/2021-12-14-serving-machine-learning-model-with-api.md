@@ -109,8 +109,8 @@ and the response received from the API will be :
 
 Next, we will tst our API by calling it from our browser. As discussed, we need not send values of all the variables for our API to work correctly. The service will interally handle it and give the output response.
 Hence, we will call the API by 
-`http://localhost:12345/predict?mean_compactness=0.277&worst%20perimeter=184.6` 
-The response should be like
+`http://localhost:12345/predict?mean_compactness=0.277&worst%20perimeter=184.6` .
+The response should be like:
 ![]({{site.baseurl}}/images/api-call.PNG)
 
 Now, that we have seen that the API is functioning properly, we will now contanerize out application using Docker. For this, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop) installed in your respective systems. Once Docker has been installed, create two files named `Dockerfile` and `requirements.txt`. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.
