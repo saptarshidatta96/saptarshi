@@ -113,9 +113,11 @@ Hence, we will call the API by
 The response should be like:
 ![]({{site.baseurl}}/images/api_call.PNG)
 
-Now, that we have seen that the API is functioning properly, we will now contanerize out application using Docker. For this, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop) installed in your respective systems. Once Docker has been installed, create two files named `Dockerfile` and `requirements.txt`. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.
+Now, that we have seen that the API is functioning properly, we will now contanerize ouR application using Docker. For this, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop) installed in your respective systems. Once Docker has been installed, create two files named `Dockerfile` and `requirements.txt`. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.
 
-This concluded the end of our blog. To know more about Docker, please go through the [Docker Documentation](https://docs.docker.com/get-started/).
+This concluded the end of our blog. Next, we can create a dummy clent application that will use our API. We can also deploy our API on Cloud Platforms like Azure, GCP or AWS. I will eb writing a blog on the same in the near future :)
+
+To know more about Docker, please go through the [Docker Documentation](https://docs.docker.com/get-started/).
 
 The GitHub Repo is available [here](https://github.com/saptarshidatta96/Breast-Cancer).
 The Docker Image is available [here](https://hub.docker.com/repository/docker/saptarshidatta96/breast_cancer).
