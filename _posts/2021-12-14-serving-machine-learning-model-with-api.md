@@ -105,7 +105,7 @@ Now that we have written out script, we can test it using Postman to check wheth
 ]
 ```
 and the response received from the API will be :
-![]({{site.baseurl}}/images/Picture1.png)
+![]({{site.baseurl}}/images/api_call1.png)
 
 Next, we will tst our API by calling it from our browser. As discussed, we need not send values of all the variables for our API to work correctly. The service will interally handle it and give the output response.
 Hence, we will call the API by 
