@@ -67,7 +67,7 @@ if __name__ == '__main__':
 ```
 The above script is responsible for exposing the functionality of out trained model as an API. We have deserialized the two .pkl files.Now, if noticed carefully the function that we wrote would only work under conditions where the incoming request contains all possible values for the categorical variables which may or may not be the case in real-time. If the incoming request does not include all possible values of the categorical variables then as per the current method definition of `predict()`, `get_dummies()` would generate a dataframe that has fewer columns than the classifier excepts, which would result in a runtime error. Hence we have serialized the columns of the dataset in .pkl format.
 
-Now that we have written out script, we can test it using Postman to check whether it's working correctly or not. Below is a typical input we will send to our API.
+Now that we have written out script, we can test it using Postman or calling the API from a browser to verify whether it's working correctly or not. Below is a typical input we can send to our API. However, we do not need to send values for all the variables as we have serialized the columns of the dataset as discussed above.
 ```
 [
     {
@@ -104,7 +104,7 @@ Now that we have written out script, we can test it using Postman to check wheth
     }
 ]
 ```
-and the response received from the API will be :
+After calling the API with Postman, the response received is:
 ![]({{site.baseurl}}/images/api_call1.PNG)
 
 Next, we will test our API by calling it from our browser. As discussed, we need not send values of all the variables for our API to work correctly. The service will interally handle it and give the output response.
@@ -115,9 +115,11 @@ Hence, we will call the API by
 The response should be like:
 ![]({{site.baseurl}}/images/api_call.PNG)
 
-Now, that we have seen that the API is functioning properly, we will now contanerize ouR application using Docker. For this, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop) installed in your respective systems. Once Docker has been installed, create two files named `Dockerfile` and `requirements.txt`. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.
+Thus, we have wrapped a ML Model and exposed it's functionality as an API. Now, a client application written in any languege will be able to leverage the functionality of the KNN Model.
 
-This concluded the end of our blog. Next, we can create a dummy clent application that will use our API. We can also deploy our API on Cloud Platforms like Azure, GCP or AWS. I will eb writing a blog on the same in the near future :)
+Now, that we have seen that the API is functioning properly, we will now contanerize our application using Docker. For this, you must have [Docker Desktop](https://www.docker.com/products/docker-desktop) installed in your respective systems. Once Docker has been installed, create two files named `Dockerfile` and `requirements.txt`. Both these files are present on the GitHub Repository for this blog. Now, that we have all the requuired files, we created the docker image and pushed it to Docker Hub after testing it.
+
+This concluded the end of our blog. Next, we can create a dummy clent application that will use our API. We can also deploy our API on Cloud Platforms like Azure, GCP or AWS. Detailed documentations are available in the internet for the same.
 
 To know more about Docker, please go through the [Docker Documentation](https://docs.docker.com/get-started/).
 
