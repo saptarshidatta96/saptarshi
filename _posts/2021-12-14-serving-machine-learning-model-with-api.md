@@ -26,7 +26,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-@app.route('/predict', methods=['GET'])
+@app.route('/predict', methods=['POST', 'GET'])
 
 
 def predict():
