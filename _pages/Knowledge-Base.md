@@ -28,7 +28,8 @@ published: true
 - [Logic and Proof](https://leanprover.github.io/logic_and_proof/index.html)
 
 ## IIT Jodhpur MTech(Artificial Intelligence)
-Semester 1 : https://github.com/saptarshidatta96/MTech_Sem1
+Semester 1 : [https://github.com/saptarshidatta96/MTech_Sem1](https://github.com/saptarshidatta96/MTech_Sem1)
+Semester 2 : [https://github.com/saptarshidatta96/MTech_Sem2](https://github.com/saptarshidatta96/MTech_Sem2)
 
 ## Classical Machine Learning
 
