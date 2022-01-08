@@ -92,4 +92,64 @@ docker tag breast_cancer:latest breastcancersd.azurecr.io/breast_cancer:v1.0
 #Push the image to ACR
 docker push breastcancersd.azurecr.io/breast_cancer:v1.0
 ```
-Next, we should create an AKS cluster and 
+Next, we should create an AKS cluster and and connect the ACR with the AKS and the cluster with kubectl.
+
+```
+#Create AKS
+az aks create --resource-group trial-rg --name breast-cancer-cluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
+
+#Connect the AKS with ACR
+az aks update -n breast-cancer-cluster -g trial-rg --attach-acr breastcancersd
+
+#Connect to cluster using kubectl.
+az aks get-credentials --resource-group trial-rg --name breast-cancer-cluster
+```
+
+Next, we need to deploy our application. Hence, we will need to create a Deployment YAML File. 
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: breast-cancer-api
+  labels:
+    app: breast-cancer-model-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: breast-cancer
+  template:
+    metadata:
+      labels:
+        app: breast-cancer
+    spec:
+      containers:
+      - name: breast-cancer
+        image: breastcancersd.azurecr.io/breast_cancer:v1.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: breast-cancer-entrypoint
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: breast-cancer
+  ports:
+  - port: 12345
+    targetPort: 12345
+```
+We should use the vi editor to create the file and name it as `breast-cancer-deploy.yaml`.Once done, save and exit from the vi editor.
+
+Next, we need to deploy to deploy the application on the kubernetes server using the below commands:
+```
+kubectl apply -f breast-cancer-deploy.yaml
+#Run this command to check the pods
+kubectl get pods
+#Run this command to check the service
+kubectl get service
+```
+Below are the outputs for the commands:
+![]({{site.baseurl}}/images/KUBERNETES.jpeg)
