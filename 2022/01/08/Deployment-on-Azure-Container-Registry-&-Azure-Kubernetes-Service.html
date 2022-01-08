@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      3 min read
     
 </span></p>
 
@@ -174,7 +174,64 @@ docker tag breast_cancer:latest breastcancersd.azurecr.io/breast_cancer:v1.0
 #Push the image to ACR
 docker push breastcancersd.azurecr.io/breast_cancer:v1.0
 </code></pre></div></div>
-<p>Next, we should create an AKS cluster and</p>
+<p>Next, we should create an AKS cluster and and connect the ACR with the AKS and the cluster with kubectl.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Create AKS
+az aks create --resource-group trial-rg --name breast-cancer-cluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
+
+#Connect the AKS with ACR
+az aks update -n breast-cancer-cluster -g trial-rg --attach-acr breastcancersd
+
+#Connect to cluster using kubectl.
+az aks get-credentials --resource-group trial-rg --name breast-cancer-cluster
+</code></pre></div></div>
+
+<p>Next, we need to deploy our application. Hence, we will need to create a Deployment YAML File.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: breast-cancer-api
+  labels:
+    app: breast-cancer-model-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: breast-cancer
+  template:
+    metadata:
+      labels:
+        app: breast-cancer
+    spec:
+      containers:
+      - name: breast-cancer
+        image: breastcancersd.azurecr.io/breast_cancer:v1.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: breast-cancer-entrypoint
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: breast-cancer
+  ports:
+  - port: 12345
+    targetPort: 12345
+</code></pre></div></div>
+<p>We should use the vi editor to create the file and name it as <code class="language-plaintext highlighter-rouge">breast-cancer-deploy.yaml</code>.Once done, save and exit from the vi editor.</p>
+
+<p>Next, we need to deploy to deploy the application on the kubernetes server using the below commands:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply -f breast-cancer-deploy.yaml
+#Run this command to check the pods
+kubectl get pods
+#Run this command to check the service
+kubectl get service
+</code></pre></div></div>
+<p>Below are the outputs for the commands:
+<img src="/images/KUBERNETES.jpeg" alt="" /></p>
 
   </div><a class="u-url" href="/2022/01/08/Deployment-on-Azure-Container-Registry-&-Azure-Kubernetes-Service.html" hidden></a>
 </article>
