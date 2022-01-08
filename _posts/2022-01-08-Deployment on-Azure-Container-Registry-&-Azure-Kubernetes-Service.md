@@ -22,5 +22,39 @@ az account show --output table
 #Create ACR
 az acr create  --resource-group trial-rg  --name breastcancersd --sku Basic
 ```
-Once we have completed completed the above steps, we should check whether the resources have been created properly in the Azure Portal. Next, we
+Once we have completed completed the above steps, we should check whether the resources have been created properly in the Azure Portal. Next, we will login to the Container registry, tag the local docker image to that of the container Registry, and then push it to the container registry.
 
+```
+#Login to ACR
+az acr login -n breastcancersd
+
+#Tag a Docker Image to ACR
+docker tag breast_cancer:latest breastcancersd.azurecr.io/breast_cancer:v1.0
+
+#Push the image to ACR
+docker push breastcancersd.azurecr.io/breast_cancer:v1.0
+```
+
+Once done, we should verify that the image is present in the Container Registry. Next, we
+
+```
+#Enable Admin Credentials on the ACR
+az acr update -n breastcancersd --admin-enabled true
+
+#Run the Azure Container Instance
+az container create --resource-group trial-rg --name breast-cancer --image breastcancersd.azurecr.io/breast_cancer:latest --cpu 1 --memory 1 --registry-login-server breastcancersd.azurecr.io --registry-username breastcancersd --registry-password sNmi=CIMYKkzt86WLvuFEm7HrOPeMlpc --dns-name-label breastcancerapp --ports 12345
+
+az container show --resource-group trial-rg --name breast-cancer --query instanceView.state
+
+az container show --resource-group trial-rg --name breast-cancer --query ipAddress.fqdn
+
+#View Logs
+az container logs --resource-group trial-rg --name breast-cancer
+```
+Once the conatiner instance is running, we can run the below access the service by
+
+Run the below command to delete the resource group to prevent Recurring Charges.
+
+```
+az group delete --name trial-rg
+```
