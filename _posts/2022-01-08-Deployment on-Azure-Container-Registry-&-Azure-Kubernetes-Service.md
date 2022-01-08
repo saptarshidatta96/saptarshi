@@ -57,7 +57,7 @@ az container show --resource-group trial-rg --name breast-cancer --query ipAddre
 #View Logs
 az container logs --resource-group trial-rg --name breast-cancer
 ```
-Once the conatiner instance is running, we can run the below access the service below
+Once the container instance is running, we can run the below access the service below
 
 ![]({{site.baseurl}}/images/ACR.PNG)
 
@@ -68,3 +68,27 @@ az group delete --name trial-rg
 ```
 
 _**##Deploying the Application on Azure Kubernetes Service(AKS)**_
+
+In this process, we will be following the same steps from creating a resource group till pushing the docker image on ACR, but after than, we will need to create a Deployment File, that will Deploy the Application on a Kubernetes Cluster.
+
+The basic, initial steps will be:
+
+```
+#Create A Resource Group
+az group create --name trial-rg --location centralindia
+
+#Get Subscription
+az account show --output table
+
+#Create ACR
+az acr create  --resource-group trial-rg  --name breastcancersd --sku Basic
+
+#Login to ACR
+az acr login -n breastcancersd
+
+#Tag a Docker Image to ACR
+docker tag breast_cancer:latest breastcancersd.azurecr.io/breast_cancer:v1.0
+
+#Push the image to ACR
+docker push breastcancersd.azurecr.io/breast_cancer:v1.0
+```
