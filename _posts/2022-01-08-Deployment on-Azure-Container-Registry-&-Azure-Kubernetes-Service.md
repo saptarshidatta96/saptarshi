@@ -7,7 +7,13 @@ In the previous [post](https://saptarshidatta.in/2021/12/14/serving-machine-lear
 
 
 Today, we're going to take it up a notch further and will deploy the service on Azure Cloud Service.
-At first, we will create a resource group and will then create an Azure Container Registry within that resource group. Every Azure Service that we are going to create will be inside our Resource Group. We have names our resource group as `trial-rg`. The name of the Azure Container Registry is `breastcancersd`.
+We can perform the task in two ways:
+
+1. Running out application as a Container Instance in Azure Container Registry(ACR)
+
+2. Deploying the Application on Azure Kubernetes Service(AKS)
+
+At first, we will create a resource group and will then create an Azure Container Registry within that resource group. Every Azure Service that we are going to create will be inside our Resource Group. We have named our resource group as `trial-rg`. The name of the Azure Container Registry is `breastcancersd`.
 
 
 We will be using Azure CLI for running the commands.
@@ -34,7 +40,6 @@ docker tag breast_cancer:latest breastcancersd.azurecr.io/breast_cancer:v1.0
 #Push the image to ACR
 docker push breastcancersd.azurecr.io/breast_cancer:v1.0
 ```
-
 Once done, we should verify that the image is present in the Container Registry. Next, we
 
 ```
@@ -51,7 +56,7 @@ az container show --resource-group trial-rg --name breast-cancer --query ipAddre
 #View Logs
 az container logs --resource-group trial-rg --name breast-cancer
 ```
-Once the conatiner instance is running, we can run the below access the service by
+Once the conatiner instance is running, we can run the below access the service below
 
 ![]({{site.baseurl}}/images/ACR.PNG)
 
