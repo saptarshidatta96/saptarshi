@@ -42,7 +42,7 @@ Once done, we should verify that the image is present in the Container Registry.
 az acr update -n breastcancersd --admin-enabled true
 
 #Run the Azure Container Instance
-az container create --resource-group trial-rg --name breast-cancer --image breastcancersd.azurecr.io/breast_cancer:latest --cpu 1 --memory 1 --registry-login-server breastcancersd.azurecr.io --registry-username breastcancersd --registry-password sNmi=CIMYKkzt86WLvuFEm7HrOPeMlpc --dns-name-label breastcancerapp --ports 12345
+az container create --resource-group trial-rg --name breast-cancer --image breastcancersd.azurecr.io/breast_cancer:latest --cpu 1 --memory 1 --registry-login-server breastcancersd.azurecr.io --registry-username breastcancersd --registry-password <acr_password> --dns-name-label breastcancerapp --ports 12345
 
 az container show --resource-group trial-rg --name breast-cancer --query instanceView.state
 
