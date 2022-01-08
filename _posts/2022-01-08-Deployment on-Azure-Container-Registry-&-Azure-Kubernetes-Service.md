@@ -53,6 +53,8 @@ az container logs --resource-group trial-rg --name breast-cancer
 ```
 Once the conatiner instance is running, we can run the below access the service by
 
+![]({{site.baseurl}}/images/ACR.PNG)
+
 Run the below command to delete the resource group to prevent Recurring Charges.
 
 ```
