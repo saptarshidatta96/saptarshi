@@ -15,6 +15,7 @@ We can perform the task in two ways:
 
 At first, we will create a resource group and will then create an Azure Container Registry within that resource group. Every Azure Service that we are going to create will be inside our Resource Group. We have named our resource group as `trial-rg`. The name of the Azure Container Registry is `breastcancersd`.
 
+_**##Running the Application as a Container Instance in Azure Container Registry(ACR)**_
 
 We will be using Azure CLI for running the commands.
 
@@ -60,8 +61,10 @@ Once the conatiner instance is running, we can run the below access the service 
 
 ![]({{site.baseurl}}/images/ACR.PNG)
 
-Run the below command to delete the resource group to prevent Recurring Charges.
+Hence we have deployed and run the application as a Container Instance on Azure Container Registry. Once, the application have been tested, make sure to run the below command to delete the resource group to prevent Recurring Charges.
 
 ```
 az group delete --name trial-rg
 ```
+
+_**##Deploying the Application on Azure Kubernetes Service(AKS)**_
