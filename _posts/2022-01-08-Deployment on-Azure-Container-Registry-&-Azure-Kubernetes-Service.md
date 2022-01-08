@@ -154,18 +154,4 @@ kubectl get service
 Below are the outputs for the commands:
 ![]({{site.baseurl}}/images/KUBERNETES.jpeg)
 
-We can connect to the External IP of the load balancer to access the application:
-![]({{site.baseurl}}/images/AKS.jpeg)
-
-Once we have checked that the application is running smoothly, we should delete the kubernetes service and deployment as well as the Azure resource group to prevent recurring charges.
-
-```
-#Delete Deployment
-kubectl delete deploy breast-cancer-api
-
-#Delete Service
-kubectl delete service breast-cancer-entrypoint
-
-#Delete Resource Group
-az group delete --name trial-rg
-```
+This brings us towards the end of this blog, where we have shown how to run the application on Azure Service.
