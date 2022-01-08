@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -89,7 +89,18 @@ window.onload = wrap_img;
     <p>In the previous <a href="https://saptarshidatta.in/2021/12/14/serving-machine-learning-model-with-api.html">post</a>, we wrapped out ML Model inside a Flask Web Service which we could access through GET and POST Requests. Once, we found the application running perfectly on out local system, we  containerised the application and pushed it to <a href="https://hub.docker.com/r/saptarshidatta96/breast_cancer">docker hub</a>.</p>
 
 <p>Today, we’re going to take it up a notch further and will deploy the service on Azure Cloud Service.
-At first, we will create a resource group and will then create an Azure Container Registry within that resource group. Every Azure Service that we are going to create will be inside our Resource Group. We have names our resource group as <code class="language-plaintext highlighter-rouge">trial-rg</code>. The name of the Azure Container Registry is <code class="language-plaintext highlighter-rouge">breastcancersd</code>.</p>
+We can perform the task in two ways:</p>
+
+<ol>
+  <li>
+    <p>Running out application as a Container Instance in Azure Container Registry(ACR)</p>
+  </li>
+  <li>
+    <p>Deploying the Application on Azure Kubernetes Service(AKS)</p>
+  </li>
+</ol>
+
+<p>At first, we will create a resource group and will then create an Azure Container Registry within that resource group. Every Azure Service that we are going to create will be inside our Resource Group. We have named our resource group as <code class="language-plaintext highlighter-rouge">trial-rg</code>. The name of the Azure Container Registry is <code class="language-plaintext highlighter-rouge">breastcancersd</code>.</p>
 
 <p>We will be using Azure CLI for running the commands.</p>
 
@@ -113,7 +124,6 @@ docker tag breast_cancer:latest breastcancersd.azurecr.io/breast_cancer:v1.0
 #Push the image to ACR
 docker push breastcancersd.azurecr.io/breast_cancer:v1.0
 </code></pre></div></div>
-
 <p>Once done, we should verify that the image is present in the Container Registry. Next, we</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Enable Admin Credentials on the ACR
@@ -129,7 +139,7 @@ az container show --resource-group trial-rg --name breast-cancer --query ipAddre
 #View Logs
 az container logs --resource-group trial-rg --name breast-cancer
 </code></pre></div></div>
-<p>Once the conatiner instance is running, we can run the below access the service by</p>
+<p>Once the conatiner instance is running, we can run the below access the service below</p>
 
 <p><img src="/images/ACR.PNG" alt="" /></p>
 
