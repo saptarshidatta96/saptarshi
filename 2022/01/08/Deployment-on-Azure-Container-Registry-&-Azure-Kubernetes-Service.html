@@ -102,7 +102,7 @@ We can perform the task in two ways:</p>
 
 <p>At first, we will create a resource group and will then create an Azure Container Registry within that resource group. Every Azure Service that we are going to create will be inside our Resource Group. We have named our resource group as <code class="language-plaintext highlighter-rouge">trial-rg</code>. The name of the Azure Container Registry is <code class="language-plaintext highlighter-rouge">breastcancersd</code>.</p>
 
-<p><em><strong>##Running the Application as a Container Instance in Azure Container Registry(ACR)</strong></em></p>
+<p>##<em><strong>Running the Application as a Container Instance in Azure Container Registry(ACR)</strong></em></p>
 
 <p>We will be using Azure CLI for running the commands.</p>
 
@@ -150,7 +150,7 @@ az container logs --resource-group trial-rg --name breast-cancer
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete --name trial-rg
 </code></pre></div></div>
 
-<p><em><strong>##Deploying the Application on Azure Kubernetes Service(AKS)</strong></em></p>
+<p>##<em><strong>Deploying the Application on Azure Kubernetes Service(AKS)</strong></em></p>
 
 <p>In this process, we will be following the same steps from creating a resource group till pushing the docker image on ACR, but after than, we will need to create a Deployment File, that will Deploy the Application on a Kubernetes Cluster.</p>
 
