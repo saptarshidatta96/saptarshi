@@ -124,7 +124,7 @@ This concluded the end of our blog. Next, we can create a dummy clent applicatio
 To know more about Docker, please go through the [Docker Documentation](https://docs.docker.com/get-started/).
 
 The GitHub Repo is available [here](https://github.com/saptarshidatta96/Breast-Cancer).
-The Docker Image is available [here](https://hub.docker.com/repository/docker/saptarshidatta96/breast_cancer).
+The Docker Image is available [here](https://hub.docker.com/r/saptarshidatta96/breast_cancer).
 
 References:
 1. [https://docs.docker.com/get-started/](https://docs.docker.com/get-started/)
