@@ -154,4 +154,7 @@ kubectl get service
 Below are the outputs for the commands:
 ![]({{site.baseurl}}/images/KUBERNETES.jpeg)
 
+And the application can be accessed at:
+![]({{site.baseurl}}/images/AKS.jpeg)
+
 This brings us towards the end of this blog, where we have shown how to run the application on Azure Service.
