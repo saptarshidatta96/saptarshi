@@ -108,7 +108,10 @@ if result:
     predictions = predictions["prediction"]
     
     if predictions[1] == 1:
-        st.write('The patient fas Breast Cancer')
+        st.write('The patient has Breast Cancer')
     else:
         st.write('Breast Cancer has not been detected.')
 ```
+
+The streamlit based User Interface that accepets user input looks like:
+![]({{site.baseurl}}/images/streamlit-ui-microservice.PNG)
