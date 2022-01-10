@@ -1,5 +1,6 @@
 ---
 published: true
+layout: post
 ---
 In the past two blog posts, I have shown how to wrap a ML Model inside a flask webservice and how to deploy the webservice on the Azure Platform.
 
@@ -111,3 +112,4 @@ if result:
     else:
         st.write('Breast Cancer has not been detected.')
 ```
+
