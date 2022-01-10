@@ -94,7 +94,7 @@ window.onload = wrap_img;
 
 <p>What if, we encounter a situation where the output of the ML model would be used by a downstream appliction thta is already running in Production. In that scenario, the client application might or moight not be coded in python where as python is the favourable language used by datascientists aound the world. To mitigate such issues, we need to have a mechanism for for python based models to interact with non-pythonic application. These type of applications are called microservcices. A microservice based architecture has several advantages and disadvantages, which is available <a href="https://solace.com/blog/microservices-advantages-and-disadvantages/">here</a>.</p>
 
-<p>In this blog, I will be using streamlit to create an User Interface that will accept input from the users, and will call the flask web service to get the prediction. This application is out client application that will be accessing the flask webservice to get the desired output. Now, insted of being a User Interface, the client application could have been a part of an already existing system in Production.</p>
+<p>In this blog, I will be using streamlit to create an User Interface that will accept input from the users, and will call the flask web service to get the prediction. This application is our client application that will be accessing the flask webservice to get the desired output. Now, insted of being a User Interface, the client application could have been a part of an already existing system in Production.</p>
 
 <p>The code for the user interface is available <a href="https://github.com/saptarshidatta96/Breast-Cancer">here</a>.</p>
 
@@ -196,6 +196,8 @@ if result:
         st.write('Breast Cancer has not been detected.')
 </code></pre></div></div>
 
+<p>The streamlit based user interface could should accept input like:
+<img src="/images/streamlit-ui-microservice.PNG" alt="" /></p>
 
   </div><a class="u-url" href="/2022/01/10/Creating-a-Microservice-instead-of-a-monolithic-application.html" hidden></a>
 </article>
