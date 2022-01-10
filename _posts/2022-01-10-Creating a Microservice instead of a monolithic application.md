@@ -113,5 +113,13 @@ if result:
         st.write('Breast Cancer has not been detected.')
 ```
 
-The streamlit based User Interface that accepets user input looks like:
+The streamlit based User Interface that accepts user input looks like:
 ![]({{site.baseurl}}/images/streamlit-ui-microservice.PNG)
+
+Now, we have come to the end of our 3 part blog series where we learnt to -
+
+1. wrap a ML Application in a Flask Webservice and run it as a container in docker.
+
+2. deploy the webservice on Azure Platform.
+
+3. call the webservice from a client application.
