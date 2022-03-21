@@ -39,7 +39,7 @@ Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 
 - Data Engineer - Analytics and Reporting platform (February, 2019 - July, 2021)
 
-- AI/ML Developer - TCS Rapid Labs (July, 2021 - Present)
+- Applied AI Developer - TCS Rapid Labs (July, 2021 - Present)
 
 ## CERTIFICATIONS 
 
@@ -53,7 +53,7 @@ Tata Consultancy Services, Kolkata - Systems Engineer (November 2018 - PRESENT)
 
 - Indian Institute of Technology, Jodhpur
 
-  MTech - Artificial Intelligence, part-time degree
+  MTech - Artificial Intelligence(Executive Batch)
 
   (February 2021 – till date)
 
